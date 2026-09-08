@@ -1,0 +1,289 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#app {
+    width: 100%;
+    height: 100vh;
+}
+
+.screen {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Main Menu */
+#mainMenu {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#mainMenu h1 {
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 2rem;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-btn {
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+/* Game Screen */
+#gameScreen {
+    background: #1a1a2e;
+    flex-direction: column;
+}
+
+.game-container {
+    width: 90%;
+    max-width: 800px;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.score-display {
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+}
+
+.game-area {
+    flex: 1;
+    background: #000;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: relative;
+    border: 3px solid #667eea;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.judge-line {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #667eea;
+    z-index: 10;
+}
+
+.key-display {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+}
+
+.key {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid;
+    border-radius: 0.5rem;
+    color: white;
+    transition: all 0.1s ease;
+}
+
+.d-key { border-color: #FF6B6B; background: rgba(255, 107, 107, 0.2); }
+.f-key { border-color: #4ECDC4; background: rgba(78, 205, 196, 0.2); }
+.j-key { border-color: #FFE66D; background: rgba(255, 230, 109, 0.2); }
+.k-key { border-color: #95E1D3; background: rgba(149, 225, 211, 0.2); }
+
+.key.active {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.back-btn {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.back-btn:hover {
+    background: white;
+    color: #667eea;
+}
+
+/* Editor Screen */
+#editorScreen {
+    background: #2a2a3e;
+    flex-direction: column;
+}
+
+.editor-container {
+    width: 95%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: white;
+}
+
+.editor-container h2 {
+    font-size: 2rem;
+}
+
+.editor-tools {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+}
+
+.editor-tools input,
+.editor-tools select {
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    border: 1px solid #667eea;
+    background: #1a1a2e;
+    color: white;
+}
+
+#editorCanvas {
+    flex: 1;
+    background: #000;
+    border: 2px solid #667eea;
+    border-radius: 0.5rem;
+}
+
+.editor-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.editor-buttons button {
+    padding: 0.8rem 2rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.editor-buttons button:hover {
+    background: #764ba2;
+}
+
+/* Settings Screen */
+#settingsScreen {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.settings-container {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 1rem;
+    min-width: 300px;
+    color: white;
+}
+
+.settings-container h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.setting-group {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.setting-group label {
+    font-size: 1.1rem;
+}
+
+.setting-group input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+.setting-group input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #mainMenu h1 {
+        font-size: 2rem;
+    }
+
+    .menu-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+
+    .key {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .score-display {
+        font-size: 1rem;
+    }
+}
