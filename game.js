@@ -13,6 +13,14 @@ const screens = {
 const songList = document.getElementById('songList');
 const pressedKeys = new Set();
 const keyElements = new Map([...document.querySelectorAll('.key[data-key]')].map((element) => [element.dataset.key, element]));
+const canvas = document.getElementById('gameCanvas');
+const context = canvas.getContext('2d');
+const lanes = ['KeyD', 'KeyF', 'KeyJ', 'KeyK'];
+let notes = [];
+let score = 0;
+let combo = 0;
+let gameStartedAt = 0;
+let animationFrame;
 let selectedSong = 0;
 
 function showScreen(name) {
@@ -22,6 +30,9 @@ function showScreen(name) {
     if (name !== 'game') {
         pressedKeys.clear();
         updateKeyDisplay();
+        cancelAnimationFrame(animationFrame);
+    } else {
+        startGame();
     }
 }
 
@@ -52,6 +63,77 @@ function updateKeyDisplay() {
     keyElements.forEach((element, code) => element.classList.toggle('active', pressedKeys.has(code)));
 }
 
+function resizeCanvas() {
+    const bounds = canvas.getBoundingClientRect();
+    const scale = window.devicePixelRatio || 1;
+    canvas.width = bounds.width * scale;
+    canvas.height = bounds.height * scale;
+    context.setTransform(scale, 0, 0, scale, 0, 0);
+}
+
+function startGame() {
+    resizeCanvas();
+    notes = Array.from({ length: 32 }, (_, index) => ({
+        lane: index % lanes.length,
+        time: index * 700 + 1500,
+        hit: false,
+    }));
+    score = 0;
+    combo = 0;
+    gameStartedAt = performance.now();
+    updateScore();
+    cancelAnimationFrame(animationFrame);
+    animationFrame = requestAnimationFrame(renderGame);
+}
+
+function updateScore() {
+    document.getElementById('score').textContent = score;
+    document.getElementById('combo').textContent = combo;
+}
+
+function renderGame(now) {
+    const elapsed = now - gameStartedAt;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const laneWidth = width / lanes.length;
+    const judgeY = height - 80;
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = '#101020';
+    context.fillRect(0, 0, width, height);
+    context.strokeStyle = 'rgba(102, 126, 234, .35)';
+    lanes.forEach((_, lane) => {
+        context.beginPath();
+        context.moveTo(lane * laneWidth, 0);
+        context.lineTo(lane * laneWidth, height);
+        context.stroke();
+    });
+    notes.forEach((note) => {
+        if (note.hit) return;
+        const distance = note.time - elapsed;
+        if (distance < -500) return;
+        const y = judgeY - (distance / 1500) * (judgeY + 50);
+        context.fillStyle = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3'][note.lane];
+        context.fillRect(note.lane * laneWidth + 8, y - 12, laneWidth - 16, 24);
+    });
+    animationFrame = requestAnimationFrame(renderGame);
+}
+
+function hitNote(code) {
+    const elapsed = performance.now() - gameStartedAt;
+    const note = notes.find((candidate) => !candidate.hit
+        && lanes[candidate.lane] === code
+        && Math.abs(candidate.time - elapsed) <= 180);
+    if (!note) {
+        combo = 0;
+        updateScore();
+        return;
+    }
+    note.hit = true;
+    combo += 1;
+    score += 100 * combo;
+    updateScore();
+}
+
 document.getElementById('startButton').addEventListener('click', () => showScreen('select'));
 document.getElementById('backButton').addEventListener('click', () => showScreen('menu'));
 document.getElementById('gameBackButton').addEventListener('click', () => showScreen('select'));
@@ -62,6 +144,7 @@ document.addEventListener('keydown', (event) => {
     if (keyElements.has(event.code)) {
         event.preventDefault();
         pressedKeys.add(event.code);
+        if (!screens.game.hidden && !event.repeat) hitNote(event.code);
         updateKeyDisplay();
     } else if (!screens.select.hidden && event.key === 'ArrowDown') {
         event.preventDefault();
@@ -84,5 +167,6 @@ window.addEventListener('blur', () => {
     pressedKeys.clear();
     updateKeyDisplay();
 });
+window.addEventListener('resize', resizeCanvas);
 
 renderSongs();
