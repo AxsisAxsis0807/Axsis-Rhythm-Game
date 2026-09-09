@@ -62,7 +62,9 @@ body {
 }
 
 .hero-layout,
-.song-select-layout {
+.mode-select-layout,
+.song-select-layout,
+.options-layout {
     position: relative;
     z-index: 1;
     width: min(1200px, 100%);
@@ -75,9 +77,220 @@ body {
     align-items: center;
 }
 
+.mode-select-layout,
+.options-layout {
+    max-width: 960px;
+}
+
 .song-select-layout {
     grid-template-columns: minmax(0, 1.4fr) minmax(320px, 420px);
     align-items: start;
+}
+
+.mania-select-layout {
+    width: min(820px, 100%);
+    gap: 1.75rem;
+}
+
+.mania-select-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.sort-box {
+    min-width: min(430px, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    padding: 0 0 0.8rem;
+    border-bottom: 3px solid #d58739;
+    color: #f7f1e8;
+}
+
+.sort-box span {
+    font-size: clamp(1.5rem, 3vw, 2.15rem);
+    letter-spacing: 0.04rem;
+}
+
+.sort-input {
+    min-width: min(300px, 48vw);
+    padding: 0.75rem 1.5rem;
+    border: 4px solid #d58739;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.92);
+    color: rgba(247, 241, 232, 0.8);
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.mania-song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.mania-song-card {
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+    width: 100%;
+    padding: 0.35rem 0.25rem;
+    border: 0;
+    border-radius: 30px;
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+}
+
+.mania-song-card.active {
+    padding: 0.45rem 0.65rem;
+    border: 6px solid rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.song-arrow {
+    width: 4.8rem;
+    height: 4.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.92);
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.95), rgba(223, 197, 255, 0.88) 48%, rgba(123, 86, 193, 0.96) 100%);
+    box-shadow:
+        0 0 0 3px rgba(129, 69, 205, 0.85) inset,
+        0 0 18px rgba(196, 118, 255, 0.8),
+        0 0 32px rgba(143, 177, 217, 0.45);
+    color: #465fff;
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff;
+}
+
+.mania-song-name {
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 0.03rem;
+    text-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+.mania-search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    min-height: 4.1rem;
+    border-radius: 16px;
+    background: rgba(39, 39, 39, 0.92);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: clamp(1.9rem, 4vw, 2.85rem);
+    letter-spacing: 0.03rem;
+}
+
+.search-icon {
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+.mania-select-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mode-select-layout {
+    gap: 1.5rem;
+}
+
+.mode-select-copy {
+    max-width: 42rem;
+}
+
+.mode-select-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.mode-card {
+    position: relative;
+    min-height: 220px;
+    padding: 1.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 28px;
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)),
+        rgba(19, 24, 37, 0.94);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.32);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.mode-card::after {
+    content: "";
+    position: absolute;
+    inset: auto -15% -35% 35%;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    filter: blur(18px);
+}
+
+.mode-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(143, 177, 217, 0.55);
+    box-shadow: 0 28px 58px rgba(0, 0, 0, 0.36);
+}
+
+.music-card {
+    background:
+        linear-gradient(145deg, rgba(143, 177, 217, 0.28), transparent 55%),
+        linear-gradient(325deg, rgba(201, 154, 176, 0.22), transparent 60%),
+        rgba(19, 24, 37, 0.94);
+}
+
+.options-card {
+    background:
+        linear-gradient(145deg, rgba(201, 154, 176, 0.28), transparent 55%),
+        linear-gradient(325deg, rgba(143, 177, 217, 0.16), transparent 60%),
+        rgba(19, 24, 37, 0.94);
+}
+
+.mode-card-label,
+.mode-card strong,
+.mode-card small {
+    position: relative;
+    z-index: 1;
+    display: block;
+}
+
+.mode-card-label {
+    margin-bottom: 1rem;
+    color: var(--muted);
+    letter-spacing: 0.28rem;
+    font-size: 0.8rem;
+}
+
+.mode-card strong {
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    letter-spacing: 0.08em;
+    line-height: 1;
+}
+
+.mode-card small {
+    margin-top: 0.85rem;
+    color: var(--muted);
+    font-size: 0.98rem;
+    letter-spacing: 0.08rem;
 }
 
 .screen-label {
@@ -148,7 +361,8 @@ body {
 
 .hero-stage,
 .song-browser,
-.song-preview {
+.song-preview,
+.options-panel {
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 28px;
@@ -262,7 +476,8 @@ body {
 .k-key { color: #8affc6; }
 
 .song-browser,
-.song-preview {
+.song-preview,
+.options-panel {
     padding: 1.75rem;
 }
 
@@ -410,18 +625,37 @@ body {
     margin-top: 1.25rem;
 }
 
+.options-layout {
+    align-items: center;
+}
+
+.options-panel {
+    width: min(100%, 680px);
+}
+
 @media (max-width: 960px) {
     .screen {
         padding: 1.5rem;
     }
 
     .hero-layout,
+    .mode-select-grid,
     .song-select-layout {
         grid-template-columns: 1fr;
     }
 
     .hero-stage {
         order: -1;
+    }
+
+    .mania-select-topbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sort-box,
+    .sort-input {
+        min-width: 0;
     }
 }
 
@@ -451,5 +685,32 @@ body {
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+    }
+
+    .mode-card {
+        min-height: 180px;
+    }
+
+    .song-arrow {
+        width: 3.7rem;
+        height: 3.7rem;
+        font-size: 2rem;
+    }
+
+    .mania-song-card.active {
+        border-width: 4px;
+    }
+
+    .sort-box {
+        gap: 1rem;
+    }
+
+    .sort-box span {
+        font-size: 1.25rem;
+    }
+
+    .sort-input {
+        font-size: 1rem;
+        padding: 0.6rem 1rem;
     }
 }

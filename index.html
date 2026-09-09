@@ -15,13 +15,11 @@
           <p class="screen-label">Axsis Rhythm Interface</p>
           <h1 id="main-title">Axsis Rhythm Game</h1>
           <p class="hero-description">
-            落ち着いたダークトーンのトップ画面から始まり、スタート後に楽曲選択へ進む
-            ブラウザ向けの4レーンリズムゲームです。
+            落ち着いたダークトーンのトップ画面から始まり、スタート後に
+            osu!mania風のメニューを経由して各画面へ進むブラウザ向けの4レーンリズムゲームです。
           </p>
           <div class="menu-buttons" aria-label="メニュー">
-            <button class="menu-btn primary" type="button" data-screen-target="songSelect">START</button>
-            <button class="menu-btn" type="button">MUSIC SELECT</button>
-            <button class="menu-btn" type="button">OPTIONS</button>
+            <button class="menu-btn primary" type="button" data-screen-target="modeSelect">START</button>
           </div>
         </div>
 
@@ -47,87 +45,122 @@
       </div>
     </section>
 
+    <section id="modeSelect" class="screen mode-select-screen" aria-labelledby="mode-select-title" hidden>
+      <div class="screen-overlay"></div>
+      <div class="mode-select-layout">
+        <div class="mode-select-copy">
+          <p class="screen-label">Next Stage</p>
+          <h2 id="mode-select-title">MODE SELECT</h2>
+          <p class="hero-description">
+            次の画面を選択してください。楽曲選択とオプションは分離し、
+            osu!maniaライクな遷移でそれぞれ独立した画面へ進みます。
+          </p>
+        </div>
+
+        <div class="mode-select-grid" aria-label="画面選択">
+          <button class="mode-card music-card" type="button" data-screen-target="songSelect">
+            <span class="mode-card-label">01</span>
+            <strong>MUSIC SELECT</strong>
+            <small>楽曲一覧へ進む</small>
+          </button>
+          <button class="mode-card options-card" type="button" data-screen-target="optionsScreen">
+            <span class="mode-card-label">02</span>
+            <strong>OPTIONS</strong>
+            <small>プレイ設定を調整する</small>
+          </button>
+        </div>
+
+        <div class="menu-buttons" aria-label="戻る操作">
+          <button class="menu-btn" type="button" data-screen-target="mainMenu">BACK</button>
+        </div>
+      </div>
+    </section>
+
     <section id="songSelect" class="screen song-select-screen" aria-labelledby="song-select-title" hidden>
       <div class="screen-overlay"></div>
-      <div class="song-select-layout">
-        <div class="song-browser">
-          <div class="browser-header">
-            <p class="screen-label">Music Select</p>
-            <h2 id="song-select-title">楽曲選択</h2>
-          </div>
-
-          <div class="song-list" role="list" aria-label="楽曲一覧">
-            <article class="song-card active" role="listitem">
-              <div class="song-meta">
-                <p class="song-genre">TRANCE CORE</p>
-                <h3>Neon Pulse</h3>
-                <p class="song-artist">Axsis Sound Unit</p>
-              </div>
-              <div class="song-stats">
-                <span class="difficulty">EX 14</span>
-                <span class="bpm">BPM 174</span>
-              </div>
-            </article>
-
-            <article class="song-card" role="listitem">
-              <div class="song-meta">
-                <p class="song-genre">FUTURE BASS</p>
-                <h3>Skyline Drift</h3>
-                <p class="song-artist">Lumi Factory</p>
-              </div>
-              <div class="song-stats">
-                <span class="difficulty">HD 10</span>
-                <span class="bpm">BPM 150</span>
-              </div>
-            </article>
-
-            <article class="song-card" role="listitem">
-              <div class="song-meta">
-                <p class="song-genre">ARTCORE</p>
-                <h3>Glass Horizon</h3>
-                <p class="song-artist">Kairo feat. SENA</p>
-              </div>
-              <div class="song-stats">
-                <span class="difficulty">MX 16</span>
-                <span class="bpm">BPM 188</span>
-              </div>
-            </article>
+      <div class="song-select-layout mania-select-layout">
+        <div class="mania-select-topbar">
+          <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
+          <div class="sort-box" aria-label="並び替え">
+            <span>Sort</span>
+            <div class="sort-input">ARTIST</div>
           </div>
         </div>
 
-        <aside class="song-preview" aria-label="選択中の楽曲情報">
-          <div class="preview-jacket">
-            <div class="jacket-glow"></div>
-            <div class="jacket-text">
-              <span>NOW SELECTING</span>
-              <strong>Neon Pulse</strong>
-            </div>
+        <div class="mania-song-list" role="list" aria-label="楽曲一覧">
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">UNDERVEIL</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Morimori Atsushi</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">nevertoogone</span>
+          </button>
+          <button class="mania-song-card active" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Iyowa</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Plum</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Project Moon</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Xyris</span>
+          </button>
+        </div>
+
+        <div class="mania-search-bar" aria-label="検索欄">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <span>Search songs</span>
+        </div>
+
+        <div class="mania-select-actions">
+          <button class="menu-btn primary" type="button">START</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="optionsScreen" class="screen options-screen" aria-labelledby="options-title" hidden>
+      <div class="screen-overlay"></div>
+      <div class="options-layout">
+        <div class="options-panel">
+          <div class="browser-header">
+            <p class="screen-label">System Option</p>
+            <h2 id="options-title">オプション</h2>
           </div>
 
           <div class="preview-details">
             <div class="detail-row">
-              <span>LEVEL</span>
-              <strong>EX 14</strong>
+              <span>HI-SPEED</span>
+              <strong>x 2.5</strong>
             </div>
             <div class="detail-row">
-              <span>BPM</span>
-              <strong>174</strong>
+              <span>NOTE OFFSET</span>
+              <strong>+00 ms</strong>
             </div>
             <div class="detail-row">
-              <span>NOTES</span>
-              <strong>1328</strong>
+              <span>LANE BRIGHTNESS</span>
+              <strong>85%</strong>
             </div>
             <div class="detail-row">
-              <span>KEYS</span>
-              <strong>D / F / J / K</strong>
+              <span>KEY VOLUME</span>
+              <strong>70%</strong>
             </div>
           </div>
 
           <div class="preview-actions">
-            <button class="menu-btn" type="button" data-screen-target="mainMenu">BACK</button>
-            <button class="menu-btn primary" type="button">START</button>
+            <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
   </main>
