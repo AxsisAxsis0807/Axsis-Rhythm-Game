@@ -15,13 +15,11 @@
           <p class="screen-label">Axsis Rhythm Interface</p>
           <h1 id="main-title">Axsis Rhythm Game</h1>
           <p class="hero-description">
-            落ち着いたダークトーンのトップ画面から始まり、スタート後に楽曲選択へ進む
-            ブラウザ向けの4レーンリズムゲームです。
+            落ち着いたダークトーンのトップ画面から始まり、スタート後に
+            osu!mania風のメニューを経由して各画面へ進むブラウザ向けの4レーンリズムゲームです。
           </p>
           <div class="menu-buttons" aria-label="メニュー">
-            <button class="menu-btn primary" type="button" data-screen-target="songSelect">START</button>
-            <button class="menu-btn" type="button">MUSIC SELECT</button>
-            <button class="menu-btn" type="button">OPTIONS</button>
+            <button class="menu-btn primary" type="button" data-screen-target="modeSelect">START</button>
           </div>
         </div>
 
@@ -43,6 +41,37 @@
             <span class="key j-key">J</span>
             <span class="key k-key">K</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="modeSelect" class="screen mode-select-screen" aria-labelledby="mode-select-title" hidden>
+      <div class="screen-overlay"></div>
+      <div class="mode-select-layout">
+        <div class="mode-select-copy">
+          <p class="screen-label">Next Stage</p>
+          <h2 id="mode-select-title">MODE SELECT</h2>
+          <p class="hero-description">
+            次の画面を選択してください。楽曲選択とオプションは分離し、
+            osu!maniaライクな遷移でそれぞれ独立した画面へ進みます。
+          </p>
+        </div>
+
+        <div class="mode-select-grid" aria-label="画面選択">
+          <button class="mode-card music-card" type="button" data-screen-target="songSelect">
+            <span class="mode-card-label">01</span>
+            <strong>MUSIC SELECT</strong>
+            <small>楽曲一覧へ進む</small>
+          </button>
+          <button class="mode-card options-card" type="button" data-screen-target="optionsScreen">
+            <span class="mode-card-label">02</span>
+            <strong>OPTIONS</strong>
+            <small>プレイ設定を調整する</small>
+          </button>
+        </div>
+
+        <div class="menu-buttons" aria-label="戻る操作">
+          <button class="menu-btn" type="button" data-screen-target="mainMenu">BACK</button>
         </div>
       </div>
     </section>
@@ -124,10 +153,45 @@
           </div>
 
           <div class="preview-actions">
-            <button class="menu-btn" type="button" data-screen-target="mainMenu">BACK</button>
+            <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
             <button class="menu-btn primary" type="button">START</button>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <section id="optionsScreen" class="screen options-screen" aria-labelledby="options-title" hidden>
+      <div class="screen-overlay"></div>
+      <div class="options-layout">
+        <div class="options-panel">
+          <div class="browser-header">
+            <p class="screen-label">System Option</p>
+            <h2 id="options-title">オプション</h2>
+          </div>
+
+          <div class="preview-details">
+            <div class="detail-row">
+              <span>HI-SPEED</span>
+              <strong>x 2.5</strong>
+            </div>
+            <div class="detail-row">
+              <span>NOTE OFFSET</span>
+              <strong>+00 ms</strong>
+            </div>
+            <div class="detail-row">
+              <span>LANE BRIGHTNESS</span>
+              <strong>85%</strong>
+            </div>
+            <div class="detail-row">
+              <span>KEY VOLUME</span>
+              <strong>70%</strong>
+            </div>
+          </div>
+
+          <div class="preview-actions">
+            <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
+          </div>
+        </div>
       </div>
     </section>
   </main>

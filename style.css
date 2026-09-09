@@ -62,7 +62,9 @@ body {
 }
 
 .hero-layout,
-.song-select-layout {
+.mode-select-layout,
+.song-select-layout,
+.options-layout {
     position: relative;
     z-index: 1;
     width: min(1200px, 100%);
@@ -75,9 +77,103 @@ body {
     align-items: center;
 }
 
+.mode-select-layout,
+.options-layout {
+    max-width: 960px;
+}
+
 .song-select-layout {
     grid-template-columns: minmax(0, 1.4fr) minmax(320px, 420px);
     align-items: start;
+}
+
+.mode-select-layout {
+    gap: 1.5rem;
+}
+
+.mode-select-copy {
+    max-width: 42rem;
+}
+
+.mode-select-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.mode-card {
+    position: relative;
+    min-height: 220px;
+    padding: 1.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 28px;
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)),
+        rgba(19, 24, 37, 0.94);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.32);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.mode-card::after {
+    content: "";
+    position: absolute;
+    inset: auto -15% -35% 35%;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    filter: blur(18px);
+}
+
+.mode-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(143, 177, 217, 0.55);
+    box-shadow: 0 28px 58px rgba(0, 0, 0, 0.36);
+}
+
+.music-card {
+    background:
+        linear-gradient(145deg, rgba(143, 177, 217, 0.28), transparent 55%),
+        linear-gradient(325deg, rgba(201, 154, 176, 0.22), transparent 60%),
+        rgba(19, 24, 37, 0.94);
+}
+
+.options-card {
+    background:
+        linear-gradient(145deg, rgba(201, 154, 176, 0.28), transparent 55%),
+        linear-gradient(325deg, rgba(143, 177, 217, 0.16), transparent 60%),
+        rgba(19, 24, 37, 0.94);
+}
+
+.mode-card-label,
+.mode-card strong,
+.mode-card small {
+    position: relative;
+    z-index: 1;
+    display: block;
+}
+
+.mode-card-label {
+    margin-bottom: 1rem;
+    color: var(--muted);
+    letter-spacing: 0.28rem;
+    font-size: 0.8rem;
+}
+
+.mode-card strong {
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    letter-spacing: 0.08em;
+    line-height: 1;
+}
+
+.mode-card small {
+    margin-top: 0.85rem;
+    color: var(--muted);
+    font-size: 0.98rem;
+    letter-spacing: 0.08rem;
 }
 
 .screen-label {
@@ -148,7 +244,8 @@ body {
 
 .hero-stage,
 .song-browser,
-.song-preview {
+.song-preview,
+.options-panel {
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 28px;
@@ -262,7 +359,8 @@ body {
 .k-key { color: #8affc6; }
 
 .song-browser,
-.song-preview {
+.song-preview,
+.options-panel {
     padding: 1.75rem;
 }
 
@@ -410,12 +508,21 @@ body {
     margin-top: 1.25rem;
 }
 
+.options-layout {
+    align-items: center;
+}
+
+.options-panel {
+    width: min(100%, 680px);
+}
+
 @media (max-width: 960px) {
     .screen {
         padding: 1.5rem;
     }
 
     .hero-layout,
+    .mode-select-grid,
     .song-select-layout {
         grid-template-columns: 1fr;
     }
@@ -451,5 +558,9 @@ body {
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+    }
+
+    .mode-card {
+        min-height: 180px;
     }
 }
