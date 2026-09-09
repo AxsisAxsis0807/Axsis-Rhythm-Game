@@ -1,3 +1,7 @@
+:root {
+    --app-height: 100vh;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,23 +12,37 @@ body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
+    min-height: 100dvh;
+    min-height: var(--app-height);
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-text-size-adjust: 100%;
 }
 
 #app {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
+    height: var(--app-height);
 }
 
 .screen {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
+    height: var(--app-height);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding:
+        max(1rem, env(safe-area-inset-top))
+        max(1rem, env(safe-area-inset-right))
+        max(1rem, env(safe-area-inset-bottom))
+        max(1rem, env(safe-area-inset-left));
 }
 
 /* Main Menu */
@@ -54,6 +72,7 @@ body {
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    touch-action: manipulation;
 }
 
 .menu-btn:hover {
@@ -75,6 +94,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    min-height: 0;
 }
 
 .score-display {
@@ -133,6 +153,10 @@ body {
     border-radius: 0.5rem;
     color: white;
     transition: all 0.1s ease;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
 
 .d-key { border-color: #FF6B6B; background: rgba(255, 107, 107, 0.2); }
@@ -154,6 +178,7 @@ body {
     border-radius: 0.5rem;
     cursor: pointer;
     margin-top: 1rem;
+    touch-action: manipulation;
 }
 
 .back-btn:hover {
@@ -297,6 +322,7 @@ body {
     .song-count { color: #aeb3d7; font-size: .8rem; letter-spacing: .1em; }
     .song-list { flex: 1; display: flex; flex-direction: column; gap: .6rem; overflow-y: auto; padding-right: .75rem; }
     .song-item { display: flex; align-items: center; gap: 1rem; width: 100%; padding: 1rem; text-align: left; color: white; background: rgba(255,255,255,.06); border: 1px solid transparent; border-radius: .65rem; cursor: pointer; }
+    .song-item { touch-action: manipulation; }
     .song-item:hover, .song-item.selected { background: linear-gradient(90deg, rgba(102,126,234,.75), rgba(102,126,234,.2)); border-color: #95a5ff; transform: translateX(5px); }
     .song-number { color: #aeb3d7; font-variant-numeric: tabular-nums; }
     .song-item strong, .song-item small { display: block; }

@@ -14,7 +14,7 @@ const songList = document.getElementById('songList');
 const pressedKeys = new Set();
 const keyElements = new Map([...document.querySelectorAll('.key[data-key]')].map((element) => [element.dataset.key, element]));
 const canvas = document.getElementById('gameCanvas');
-const context = canvas.getContext('2d');
+let context = null;
 const lanes = ['KeyD', 'KeyF', 'KeyJ', 'KeyK'];
 let notes = [];
 let score = 0;
@@ -22,6 +22,18 @@ let combo = 0;
 let gameStartedAt = 0;
 let animationFrame;
 let selectedSong = 0;
+
+function updateViewportHeight() {
+    document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+}
+
+function initializeCanvas() {
+    if (!context && canvas) {
+        context = canvas.getContext('2d');
+    }
+
+    return Boolean(context);
+}
 
 function showScreen(name) {
     Object.entries(screens).forEach(([screenName, element]) => {
@@ -48,14 +60,19 @@ function selectSong(index) {
 
 function renderSongs() {
     document.getElementById('songCount').textContent = songs.length;
-    songList.replaceChildren(...songs.map((song, index) => {
+    const fragment = document.createDocumentFragment();
+
+    songs.forEach((song, index) => {
         const item = document.createElement('button');
         item.type = 'button';
         item.className = 'song-item';
         item.innerHTML = `<span class="song-number">${String(index + 1).padStart(2, '0')}</span><span><strong>${song.title}</strong><small>${song.artist}</small></span><span class="song-stars">${song.difficulty.split('★ ')[1]}</span>`;
         item.addEventListener('click', () => selectSong(index));
-        return item;
-    }));
+        fragment.appendChild(item);
+    });
+
+    songList.textContent = '';
+    songList.appendChild(fragment);
     selectSong(0);
 }
 
@@ -64,14 +81,21 @@ function updateKeyDisplay() {
 }
 
 function resizeCanvas() {
+    if (!initializeCanvas()) return;
+
     const bounds = canvas.getBoundingClientRect();
     const scale = window.devicePixelRatio || 1;
-    canvas.width = bounds.width * scale;
-    canvas.height = bounds.height * scale;
+    const width = Math.max(bounds.width, 1);
+    const height = Math.max(bounds.height, 1);
+
+    canvas.width = width * scale;
+    canvas.height = height * scale;
     context.setTransform(scale, 0, 0, scale, 0, 0);
 }
 
 function startGame() {
+    if (!initializeCanvas()) return;
+
     resizeCanvas();
     notes = Array.from({ length: 32 }, (_, index) => ({
         lane: index % lanes.length,
@@ -92,6 +116,8 @@ function updateScore() {
 }
 
 function renderGame(now) {
+    if (!context) return;
+
     const elapsed = now - gameStartedAt;
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
@@ -134,6 +160,22 @@ function hitNote(code) {
     updateScore();
 }
 
+function pressLane(code) {
+    if (!keyElements.has(code)) return;
+
+    const wasPressed = pressedKeys.has(code);
+    pressedKeys.add(code);
+    if (!screens.game.hidden && !wasPressed) hitNote(code);
+    updateKeyDisplay();
+}
+
+function releaseLane(code) {
+    if (!keyElements.has(code)) return;
+
+    pressedKeys.delete(code);
+    updateKeyDisplay();
+}
+
 document.getElementById('startButton').addEventListener('click', () => showScreen('select'));
 document.getElementById('backButton').addEventListener('click', () => showScreen('menu'));
 document.getElementById('gameBackButton').addEventListener('click', () => showScreen('select'));
@@ -143,9 +185,7 @@ document.addEventListener('keydown', (event) => {
     if (screens.select.hidden && !keyElements.has(event.code)) return;
     if (keyElements.has(event.code)) {
         event.preventDefault();
-        pressedKeys.add(event.code);
-        if (!screens.game.hidden && !event.repeat) hitNote(event.code);
-        updateKeyDisplay();
+        if (!event.repeat) pressLane(event.code);
     } else if (!screens.select.hidden && event.key === 'ArrowDown') {
         event.preventDefault();
         selectSong(selectedSong + 1);
@@ -159,14 +199,42 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keyup', (event) => {
     if (keyElements.has(event.code)) {
         event.preventDefault();
-        pressedKeys.delete(event.code);
-        updateKeyDisplay();
+        releaseLane(event.code);
     }
 });
+
+keyElements.forEach((element, code) => {
+    element.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        pressLane(code);
+    }, { passive: false });
+
+    element.addEventListener('touchend', (event) => {
+        event.preventDefault();
+        releaseLane(code);
+    }, { passive: false });
+
+    element.addEventListener('touchcancel', () => {
+        releaseLane(code);
+    });
+});
+
 window.addEventListener('blur', () => {
     pressedKeys.clear();
     updateKeyDisplay();
 });
-window.addEventListener('resize', resizeCanvas);
+window.addEventListener('resize', () => {
+    updateViewportHeight();
+    resizeCanvas();
+});
+window.addEventListener('orientationchange', () => {
+    updateViewportHeight();
+    resizeCanvas();
+});
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', updateViewportHeight);
+}
 
+updateViewportHeight();
+initializeCanvas();
 renderSongs();
