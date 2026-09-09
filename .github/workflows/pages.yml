@@ -8,6 +8,7 @@ on:
 
 jobs:
   deploy:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -22,14 +23,52 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check GitHub Pages configuration
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          status=$(curl -sS -o /tmp/pages-site.json -w "%{http_code}" \
+            -H "Accept: application/vnd.github+json" \
+            --oauth2-bearer "$GH_TOKEN" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages")
+
+          if [ "$status" = "200" ]; then
+            build_type=$(python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path("/tmp/pages-site.json").read_text())
+          print(data.get("build_type", ""))
+          PY
+            )
+
+            if [ "$build_type" = "workflow" ]; then
+              echo "configured=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "configured=false" >> "$GITHUB_OUTPUT"
+              echo "::warning::GitHub Pages is enabled but not configured to build from GitHub Actions. Update the repository Pages source to GitHub Actions to allow deployments."
+            fi
+          elif [ "$status" = "404" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::GitHub Pages is not enabled for this repository. Enable Pages and set the source to GitHub Actions to allow deployments."
+          else
+            echo "::error::Failed to read the GitHub Pages configuration (HTTP $status)."
+            cat /tmp/pages-site.json
+            exit 1
+          fi
+
       - name: Setup Pages
+        if: steps.pages.outputs.configured == 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: steps.pages.outputs.configured == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
+        if: steps.pages.outputs.configured == 'true'
         uses: actions/deploy-pages@v4
