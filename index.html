@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axsis Rhythm Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="app">
+        <section id="mainMenu" class="screen">
+            <h1>Axsis Rhythm Game</h1>
+            <div class="menu-buttons">
+                <button class="menu-btn" id="startButton" type="button">楽曲を選ぶ</button>
+            </div>
+        </section>
+
+        <section id="songSelectScreen" class="screen" hidden>
+            <div class="song-select-container">
+                <header class="song-select-header">
+                    <div>
+                        <p class="eyebrow">MUSIC SELECT</p>
+                        <h2>楽曲選択</h2>
+                    </div>
+                    <p class="song-count"><span id="songCount">0</span> SONGS</p>
+                </header>
+                <div class="song-select-content">
+                    <nav class="song-list" id="songList" aria-label="楽曲一覧"></nav>
+                    <aside class="song-details" aria-live="polite">
+                        <div class="album-art" id="albumArt">♪</div>
+                        <p class="eyebrow">SELECTED SONG</p>
+                        <h3 id="songTitle"></h3>
+                        <p id="songArtist"></p>
+                        <div class="difficulty">
+                            <span>DIFFICULTY</span>
+                            <strong id="songDifficulty"></strong>
+                        </div>
+                        <button class="menu-btn play-btn" id="playButton" type="button">プレイする</button>
+                    </aside>
+                </div>
+                <button class="back-btn" id="backButton" type="button">メニューに戻る</button>
+            </div>
+        </section>
+
+        <section id="gameScreen" class="screen" hidden>
+            <div class="game-container">
+                <div class="score-display">Score: <strong id="score">0</strong><span>Combo: <strong id="combo">0</strong></span></div>
+                <div class="game-area"><canvas id="gameCanvas"></canvas><div class="judge-line"></div></div>
+                <div class="key-display" aria-label="Keyboard controls">
+                    <div class="key d-key" data-key="KeyD">D</div>
+                    <div class="key f-key" data-key="KeyF">F</div>
+                    <div class="key j-key" data-key="KeyJ">J</div>
+                    <div class="key k-key" data-key="KeyK">K</div>
+                </div>
+                <button class="back-btn" id="gameBackButton" type="button">楽曲選択に戻る</button>
+            </div>
+        </section>
+    </main>
+    <script src="game.js"></script>
+</body>
+</html>
