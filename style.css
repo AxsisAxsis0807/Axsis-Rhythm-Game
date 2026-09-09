@@ -87,6 +87,123 @@ body {
     align-items: start;
 }
 
+.mania-select-layout {
+    width: min(820px, 100%);
+    gap: 1.75rem;
+}
+
+.mania-select-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.sort-box {
+    min-width: min(430px, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    padding: 0 0 0.8rem;
+    border-bottom: 3px solid #d58739;
+    color: #f7f1e8;
+}
+
+.sort-box span {
+    font-size: clamp(1.5rem, 3vw, 2.15rem);
+    letter-spacing: 0.04rem;
+}
+
+.sort-input {
+    min-width: min(300px, 48vw);
+    padding: 0.75rem 1.5rem;
+    border: 4px solid #d58739;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.92);
+    color: rgba(247, 241, 232, 0.8);
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.mania-song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.mania-song-card {
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+    width: 100%;
+    padding: 0.35rem 0.25rem;
+    border: 0;
+    border-radius: 30px;
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+}
+
+.mania-song-card.active {
+    padding: 0.45rem 0.65rem;
+    border: 6px solid rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.song-arrow {
+    width: 4.8rem;
+    height: 4.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.92);
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.95), rgba(223, 197, 255, 0.88) 48%, rgba(123, 86, 193, 0.96) 100%);
+    box-shadow:
+        0 0 0 3px rgba(129, 69, 205, 0.85) inset,
+        0 0 18px rgba(196, 118, 255, 0.8),
+        0 0 32px rgba(143, 177, 217, 0.45);
+    color: #465fff;
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff;
+}
+
+.mania-song-name {
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 0.03rem;
+    text-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+.mania-search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    min-height: 4.1rem;
+    border-radius: 16px;
+    background: rgba(39, 39, 39, 0.92);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: clamp(1.9rem, 4vw, 2.85rem);
+    letter-spacing: 0.03rem;
+}
+
+.search-icon {
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+.mania-select-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .mode-select-layout {
     gap: 1.5rem;
 }
@@ -530,6 +647,16 @@ body {
     .hero-stage {
         order: -1;
     }
+
+    .mania-select-topbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sort-box,
+    .sort-input {
+        min-width: 0;
+    }
 }
 
 @media (max-width: 640px) {
@@ -562,5 +689,28 @@ body {
 
     .mode-card {
         min-height: 180px;
+    }
+
+    .song-arrow {
+        width: 3.7rem;
+        height: 3.7rem;
+        font-size: 2rem;
+    }
+
+    .mania-song-card.active {
+        border-width: 4px;
+    }
+
+    .sort-box {
+        gap: 1rem;
+    }
+
+    .sort-box span {
+        font-size: 1.25rem;
+    }
+
+    .sort-input {
+        font-size: 1rem;
+        padding: 0.6rem 1rem;
     }
 }

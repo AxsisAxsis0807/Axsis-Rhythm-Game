@@ -78,85 +78,54 @@
 
     <section id="songSelect" class="screen song-select-screen" aria-labelledby="song-select-title" hidden>
       <div class="screen-overlay"></div>
-      <div class="song-select-layout">
-        <div class="song-browser">
-          <div class="browser-header">
-            <p class="screen-label">Music Select</p>
-            <h2 id="song-select-title">楽曲選択</h2>
-          </div>
-
-          <div class="song-list" role="list" aria-label="楽曲一覧">
-            <article class="song-card active" role="listitem">
-              <div class="song-meta">
-                <p class="song-genre">TRANCE CORE</p>
-                <h3>Neon Pulse</h3>
-                <p class="song-artist">Axsis Sound Unit</p>
-              </div>
-              <div class="song-stats">
-                <span class="difficulty">EX 14</span>
-                <span class="bpm">BPM 174</span>
-              </div>
-            </article>
-
-            <article class="song-card" role="listitem">
-              <div class="song-meta">
-                <p class="song-genre">FUTURE BASS</p>
-                <h3>Skyline Drift</h3>
-                <p class="song-artist">Lumi Factory</p>
-              </div>
-              <div class="song-stats">
-                <span class="difficulty">HD 10</span>
-                <span class="bpm">BPM 150</span>
-              </div>
-            </article>
-
-            <article class="song-card" role="listitem">
-              <div class="song-meta">
-                <p class="song-genre">ARTCORE</p>
-                <h3>Glass Horizon</h3>
-                <p class="song-artist">Kairo feat. SENA</p>
-              </div>
-              <div class="song-stats">
-                <span class="difficulty">MX 16</span>
-                <span class="bpm">BPM 188</span>
-              </div>
-            </article>
+      <div class="song-select-layout mania-select-layout">
+        <div class="mania-select-topbar">
+          <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
+          <div class="sort-box" aria-label="並び替え">
+            <span>Sort</span>
+            <div class="sort-input">ARTIST</div>
           </div>
         </div>
 
-        <aside class="song-preview" aria-label="選択中の楽曲情報">
-          <div class="preview-jacket">
-            <div class="jacket-glow"></div>
-            <div class="jacket-text">
-              <span>NOW SELECTING</span>
-              <strong>Neon Pulse</strong>
-            </div>
-          </div>
+        <div class="mania-song-list" role="list" aria-label="楽曲一覧">
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">UNDERVEIL</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Morimori Atsushi</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">nevertoogone</span>
+          </button>
+          <button class="mania-song-card active" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Iyowa</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Plum</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Project Moon</span>
+          </button>
+          <button class="mania-song-card" type="button" role="listitem">
+            <span class="song-arrow" aria-hidden="true">↗</span>
+            <span class="mania-song-name">Xyris</span>
+          </button>
+        </div>
 
-          <div class="preview-details">
-            <div class="detail-row">
-              <span>LEVEL</span>
-              <strong>EX 14</strong>
-            </div>
-            <div class="detail-row">
-              <span>BPM</span>
-              <strong>174</strong>
-            </div>
-            <div class="detail-row">
-              <span>NOTES</span>
-              <strong>1328</strong>
-            </div>
-            <div class="detail-row">
-              <span>KEYS</span>
-              <strong>D / F / J / K</strong>
-            </div>
-          </div>
+        <div class="mania-search-bar" aria-label="検索欄">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <span>Search Mod</span>
+        </div>
 
-          <div class="preview-actions">
-            <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
-            <button class="menu-btn primary" type="button">START</button>
-          </div>
-        </aside>
+        <div class="mania-select-actions">
+          <button class="menu-btn primary" type="button">START</button>
+        </div>
       </div>
     </section>
 
