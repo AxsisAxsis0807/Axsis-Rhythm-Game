@@ -8,20 +8,20 @@
 </head>
 <body>
   <main id="app">
-    <section id="mainMenu" class="screen hero-screen" aria-labelledby="main-title">
+    <section id="mainMenu" class="screen hero-screen is-active" aria-labelledby="main-title">
       <div class="screen-overlay"></div>
       <div class="hero-layout">
         <div class="hero-copy">
-          <p class="screen-label">Axsis Arcade Interface</p>
+          <p class="screen-label">Axsis Rhythm Interface</p>
           <h1 id="main-title">Axsis Rhythm Game</h1>
           <p class="hero-description">
-            ダークなネオンUIで楽曲を選び、4レーンを叩くブラウザ向けリズムゲーム。
-            osu!mania風の空気感を参考にしつつ、オリジナルのトップ画面にまとめました。
+            落ち着いたダークトーンのトップ画面から始まり、スタート後に楽曲選択へ進む
+            ブラウザ向けの4レーンリズムゲームです。
           </p>
           <div class="menu-buttons" aria-label="メニュー">
-            <a class="menu-btn primary" href="#songSelect">PLAY</a>
-            <a class="menu-btn" href="#songSelect">MUSIC SELECT</a>
-            <a class="menu-btn" href="#songSelect">OPTIONS</a>
+            <button class="menu-btn primary" type="button" data-screen-target="songSelect">START</button>
+            <button class="menu-btn" type="button">MUSIC SELECT</button>
+            <button class="menu-btn" type="button">OPTIONS</button>
           </div>
         </div>
 
@@ -47,7 +47,7 @@
       </div>
     </section>
 
-    <section id="songSelect" class="screen song-select-screen" aria-labelledby="song-select-title">
+    <section id="songSelect" class="screen song-select-screen" aria-labelledby="song-select-title" hidden>
       <div class="screen-overlay"></div>
       <div class="song-select-layout">
         <div class="song-browser">
@@ -124,12 +124,31 @@
           </div>
 
           <div class="preview-actions">
-            <a class="menu-btn primary" href="#mainMenu">BACK</a>
-            <a class="menu-btn" href="#songSelect">START</a>
+            <button class="menu-btn" type="button" data-screen-target="mainMenu">BACK</button>
+            <button class="menu-btn primary" type="button">START</button>
           </div>
         </aside>
       </div>
     </section>
   </main>
+
+  <script>
+    const screens = document.querySelectorAll('.screen');
+    const screenButtons = document.querySelectorAll('[data-screen-target]');
+
+    const showScreen = (targetId) => {
+      screens.forEach((screen) => {
+        const isTarget = screen.id === targetId;
+        screen.hidden = !isTarget;
+        screen.classList.toggle('is-active', isTarget);
+      });
+    };
+
+    screenButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        showScreen(button.dataset.screenTarget);
+      });
+    });
+  </script>
 </body>
 </html>
