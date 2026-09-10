@@ -123,6 +123,54 @@
           <span>Search songs</span>
         </div>
 
+        <section class="import-panel" aria-labelledby="import-panel-title">
+          <div class="import-panel-header">
+            <p class="screen-label">Local Import</p>
+            <h3 id="import-panel-title">譜面データを読み込む</h3>
+            <p class="import-panel-copy">
+              iPhoneでも「ファイル」からJSONや音源、画像を選べるように、直接ファイル選択できる入力欄を用意しました。
+            </p>
+          </div>
+
+          <div class="import-grid">
+            <label class="import-field" for="chartFile">
+              <span>譜面JSON</span>
+              <input
+                id="chartFile"
+                type="file"
+                accept=".json,application/json,text/json"
+              >
+              <small>`.json` を選択</small>
+            </label>
+
+            <label class="import-field" for="audioFile">
+              <span>音源ファイル</span>
+              <input
+                id="audioFile"
+                type="file"
+                accept=".mp3,.m4a,.aac,.wav,.ogg,.flac,audio/*"
+              >
+              <small>iPhoneのファイルApp内の音源を選択</small>
+            </label>
+
+            <label class="import-field" for="artFile">
+              <span>ジャケット画像</span>
+              <input
+                id="artFile"
+                type="file"
+                accept=".png,.jpg,.jpeg,.webp,image/*"
+              >
+              <small>任意で画像を追加</small>
+            </label>
+          </div>
+
+          <div class="import-status" aria-live="polite">
+            <p id="chartStatus">譜面JSON: 未選択</p>
+            <p id="audioStatus">音源ファイル: 未選択</p>
+            <p id="artStatus">ジャケット画像: 未選択</p>
+          </div>
+        </section>
+
         <div class="mania-select-actions">
           <button class="menu-btn primary" type="button">START</button>
         </div>
@@ -168,6 +216,12 @@
   <script>
     const screens = document.querySelectorAll('.screen');
     const screenButtons = document.querySelectorAll('[data-screen-target]');
+    const chartFileInput = document.getElementById('chartFile');
+    const audioFileInput = document.getElementById('audioFile');
+    const artFileInput = document.getElementById('artFile');
+    const chartStatus = document.getElementById('chartStatus');
+    const audioStatus = document.getElementById('audioStatus');
+    const artStatus = document.getElementById('artStatus');
 
     const showScreen = (targetId) => {
       screens.forEach((screen) => {
@@ -181,6 +235,45 @@
       button.addEventListener('click', () => {
         showScreen(button.dataset.screenTarget);
       });
+    });
+
+    const readFileText = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error('ファイルの読み込みに失敗しました。'));
+      reader.readAsText(file);
+    });
+
+    const setFileStatus = (element, label, file) => {
+      element.textContent = file ? `${label}: ${file.name}` : `${label}: 未選択`;
+      element.classList.remove('is-error');
+    };
+
+    chartFileInput?.addEventListener('change', async (event) => {
+      const [file] = event.target.files;
+
+      if (!file) {
+        setFileStatus(chartStatus, '譜面JSON', null);
+        return;
+      }
+
+      try {
+        const text = await readFileText(file);
+        JSON.parse(text);
+        chartStatus.textContent = `譜面JSON: ${file.name} を読み込みました`;
+        chartStatus.classList.remove('is-error');
+      } catch (error) {
+        chartStatus.textContent = `譜面JSON: ${file.name} はJSONとして読み込めません`;
+        chartStatus.classList.add('is-error');
+      }
+    });
+
+    audioFileInput?.addEventListener('change', (event) => {
+      setFileStatus(audioStatus, '音源ファイル', event.target.files[0] ?? null);
+    });
+
+    artFileInput?.addEventListener('change', (event) => {
+      setFileStatus(artStatus, 'ジャケット画像', event.target.files[0] ?? null);
     });
   </script>
 </body>

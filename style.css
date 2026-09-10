@@ -204,6 +204,69 @@ body {
     justify-content: flex-end;
 }
 
+.import-panel {
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    background: rgba(14, 18, 29, 0.88);
+    box-shadow: 0 18px 32px rgba(0, 0, 0, 0.24);
+}
+
+.import-panel-header h3 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin-bottom: 0.75rem;
+}
+
+.import-panel-copy {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.import-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.import-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text);
+}
+
+.import-field span {
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+}
+
+.import-field input {
+    width: 100%;
+    color: var(--text);
+    font: inherit;
+}
+
+.import-field small,
+.import-status {
+    color: var(--muted);
+}
+
+.import-status {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.import-status .is-error {
+    color: #ff9cae;
+}
+
 .mode-select-layout {
     gap: 1.5rem;
 }
@@ -640,7 +703,8 @@ body {
 
     .hero-layout,
     .mode-select-grid,
-    .song-select-layout {
+    .song-select-layout,
+    .import-grid {
         grid-template-columns: 1fr;
     }
 
