@@ -37,7 +37,10 @@ async function registerUser({ username, password, displayName }, existingUsers =
   }
 
   const canonicalUsername = toCanonicalUsername(normalizedUsername);
-  const isDuplicate = existingUsers.some((user) => toCanonicalUsername(user.username) === canonicalUsername);
+  const isDuplicate = existingUsers.some((user) => {
+    const existingUsername = normalizeUsername(user.username);
+    return toCanonicalUsername(existingUsername) === canonicalUsername;
+  });
 
   if (isDuplicate) {
     throw new Error('そのユーザー名はすでに使用されています。');
@@ -87,7 +90,9 @@ if (require.main === module) {
 
     users = users.concat(registeredUser);
 
-    console.log('登録結果:', registeredUser);
+    const { hashedPassword, ...safeUserPreview } = registeredUser;
+
+    console.log('登録結果:', safeUserPreview);
     console.log('ハッシュ照合:', await bcrypt.compare('SuperSecurePass123!', registeredUser.hashedPassword));
     console.log('保存件数:', users.length);
     console.log('--- user registration demo end ---');

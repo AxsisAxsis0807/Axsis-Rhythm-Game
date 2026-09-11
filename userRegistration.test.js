@@ -7,7 +7,7 @@ const {
 } = require('./userRegistration');
 
 (async () => {
-  const existingUsers = [{ username: 'creator_zero' }];
+  const existingUsers = [{ username: ' creator_zero ' }];
 
   const user = await registerUser(
     {
