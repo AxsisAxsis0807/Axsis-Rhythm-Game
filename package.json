@@ -4,7 +4,7 @@
   "description": "A rhythm game developed by Axsis.",
   "main": "userRegistration.js",
   "scripts": {
-    "test": "node userRegistration.js"
+    "test": "node userRegistration.test.js"
   },
   "repository": {
     "type": "git",

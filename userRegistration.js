@@ -8,6 +8,10 @@ function normalizeUsername(username) {
   return typeof username === 'string' ? username.trim() : '';
 }
 
+function toCanonicalUsername(username) {
+  return normalizeUsername(username).toLowerCase();
+}
+
 function normalizeDisplayName(displayName) {
   return typeof displayName === 'string' ? displayName.trim() : '';
 }
@@ -32,9 +36,8 @@ async function registerUser({ username, password, displayName }, existingUsers =
     throw new Error('表示名は必須です。');
   }
 
-  const isDuplicate = existingUsers.some(
-    (user) => normalizeUsername(user.username).toLowerCase() === normalizedUsername.toLowerCase()
-  );
+  const canonicalUsername = toCanonicalUsername(normalizedUsername);
+  const isDuplicate = existingUsers.some((user) => toCanonicalUsername(user.username) === canonicalUsername);
 
   if (isDuplicate) {
     throw new Error('そのユーザー名はすでに使用されています。');
@@ -43,7 +46,7 @@ async function registerUser({ username, password, displayName }, existingUsers =
   const hashedPassword = await bcrypt.hash(password, DEFAULT_HASH_ROUNDS);
 
   const newUser = {
-    username: normalizedUsername,
+    username: canonicalUsername,
     displayName: normalizedDisplayName,
     hashedPassword,
     avatarUrl: DEFAULT_AVATAR_URL,
@@ -57,13 +60,13 @@ async function registerUser({ username, password, displayName }, existingUsers =
     createdAt: new Date().toISOString(),
   };
 
-  existingUsers.push(newUser);
   return newUser;
 }
 
 module.exports = {
   DEFAULT_AVATAR_URL,
   USERNAME_PATTERN,
+  toCanonicalUsername,
   registerUser,
 };
 
@@ -71,7 +74,7 @@ if (require.main === module) {
   const assert = require("node:assert/strict");
 
   (async () => {
-    const users = [];
+    let users = [];
 
     console.log('--- user registration demo start ---');
 
@@ -84,8 +87,10 @@ if (require.main === module) {
       users
     );
 
+    users = users.concat(registeredUser);
+
     assert.equal(users.length, 1);
-    assert.equal(registeredUser.username, 'Chart_Creator01');
+    assert.equal(registeredUser.username, 'chart_creator01');
     assert.equal(registeredUser.displayName, '譜面師Axsis');
     assert.equal(registeredUser.avatarUrl, DEFAULT_AVATAR_URL);
     assert.equal(registeredUser.followersCount, 0);
