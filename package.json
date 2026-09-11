@@ -1,0 +1,19 @@
+{
+  "name": "axsis-rhythm-game",
+  "version": "1.0.0",
+  "description": "A rhythm game developed by Axsis.",
+  "main": "userRegistration.js",
+  "scripts": {
+    "test": "node userRegistration.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://localhost:26831/AxsisAxsis0807/Axsis-Rhythm-Game"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3"
+  }
+}
