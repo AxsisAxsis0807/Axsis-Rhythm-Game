@@ -6,6 +6,8 @@
 
 :root {
     color-scheme: dark;
+    --viewport-width: 100vw;
+    --viewport-height: 100vh;
     --bg: #0d1220;
     --bg-elevated: rgba(15, 20, 33, 0.9);
     --panel: rgba(24, 30, 46, 0.88);
@@ -30,10 +32,12 @@ body {
         linear-gradient(180deg, #141a28 0%, #0b101a 100%);
     color: var(--text);
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 #app {
     width: 100%;
+    min-height: 100vh;
 }
 
 .screen {
@@ -656,6 +660,35 @@ body {
     .sort-box,
     .sort-input {
         min-width: 0;
+    }
+}
+
+@media (orientation: portrait) {
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        min-height: var(--viewport-width);
+    }
+
+    #app {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: var(--viewport-height);
+        min-height: var(--viewport-width);
+        transform: translate(-50%, -50%) rotate(90deg);
+        transform-origin: center;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .screen {
+        min-height: var(--viewport-width);
     }
 }
 

@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Axsis Rhythm Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -166,6 +166,23 @@
   </main>
 
   <script>
+    const updateViewportSize = () => {
+      document.documentElement.style.setProperty('--viewport-width', `${window.innerWidth}px`);
+      document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+    };
+
+    const lockLandscape = async () => {
+      if (!screen.orientation?.lock) {
+        return;
+      }
+
+      try {
+        await screen.orientation.lock('landscape');
+      } catch (error) {
+        // Some browsers only allow orientation lock in fullscreen or installed mode.
+      }
+    };
+
     const screens = document.querySelectorAll('.screen');
     const screenButtons = document.querySelectorAll('[data-screen-target]');
 
@@ -179,9 +196,16 @@
 
     screenButtons.forEach((button) => {
       button.addEventListener('click', () => {
+        lockLandscape();
         showScreen(button.dataset.screenTarget);
       });
     });
+
+    updateViewportSize();
+    lockLandscape();
+
+    window.addEventListener('resize', updateViewportSize);
+    window.addEventListener('orientationchange', updateViewportSize);
   </script>
 </body>
 </html>
