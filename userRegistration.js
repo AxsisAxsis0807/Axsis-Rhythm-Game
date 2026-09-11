@@ -71,8 +71,6 @@ module.exports = {
 };
 
 if (require.main === module) {
-  const assert = require("node:assert/strict");
-
   (async () => {
     let users = [];
 
@@ -89,48 +87,10 @@ if (require.main === module) {
 
     users = users.concat(registeredUser);
 
-    assert.equal(users.length, 1);
-    assert.equal(registeredUser.username, 'chart_creator01');
-    assert.equal(registeredUser.displayName, '譜面師Axsis');
-    assert.equal(registeredUser.avatarUrl, DEFAULT_AVATAR_URL);
-    assert.equal(registeredUser.followersCount, 0);
-    assert.equal(registeredUser.followingCount, 0);
-    assert.equal(registeredUser.totalHeartsReceived, 0);
-    assert.deepEqual(registeredUser.postedCharts, []);
-    assert.deepEqual(registeredUser.likedCharts, []);
-    assert.notEqual(registeredUser.hashedPassword, 'SuperSecurePass123!');
-    assert.equal(await bcrypt.compare('SuperSecurePass123!', registeredUser.hashedPassword), true);
-
-    console.log('成功ケース: OK');
-
-    await assert.rejects(
-      registerUser(
-        {
-          username: 'Chart_Creator01',
-          password: 'AnotherPass123!',
-          displayName: 'Duplicate',
-        },
-        users
-      ),
-      /すでに使用されています/
-    );
-
-    console.log('重複ユーザー名チェック: OK');
-
-    await assert.rejects(
-      registerUser(
-        {
-          username: 'invalid-name!',
-          password: 'ValidPass123!',
-          displayName: 'Invalid Name',
-        },
-        users
-      ),
-      /英数字とアンダースコアのみ/
-    );
-
-    console.log('ユーザー名バリデーション: OK');
-    console.log('--- all demo tests passed ---');
+    console.log('登録結果:', registeredUser);
+    console.log('ハッシュ照合:', await bcrypt.compare('SuperSecurePass123!', registeredUser.hashedPassword));
+    console.log('保存件数:', users.length);
+    console.log('--- user registration demo end ---');
   })().catch((error) => {
     console.error('Demo failed:', error);
     process.exitCode = 1;

@@ -56,6 +56,42 @@ const {
     /英数字とアンダースコアのみ/
   );
 
+  await assert.rejects(
+    registerUser(
+      {
+        username: '   ',
+        password: 'ValidPass123!',
+        displayName: 'No Username',
+      },
+      existingUsers
+    ),
+    /ユーザー名は必須です/
+  );
+
+  await assert.rejects(
+    registerUser(
+      {
+        username: 'valid_name',
+        password: '',
+        displayName: 'No Password',
+      },
+      existingUsers
+    ),
+    /パスワードは必須です/
+  );
+
+  await assert.rejects(
+    registerUser(
+      {
+        username: 'valid_name',
+        password: 'ValidPass123!',
+        displayName: '   ',
+      },
+      existingUsers
+    ),
+    /表示名は必須です/
+  );
+
   console.log('userRegistration.test.js: all tests passed');
 })().catch((error) => {
   console.error(error);
