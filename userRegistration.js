@@ -16,8 +16,13 @@ function normalizeDisplayName(displayName) {
   return typeof displayName === 'string' ? displayName.trim() : '';
 }
 
+function normalizePassword(password) {
+  return typeof password === 'string' ? password.trim() : '';
+}
+
 async function registerUser({ username, password, displayName }, existingUsers = []) {
   const normalizedUsername = normalizeUsername(username);
+  const normalizedPassword = normalizePassword(password);
   const normalizedDisplayName = normalizeDisplayName(displayName);
 
   if (!normalizedUsername) {
@@ -28,7 +33,7 @@ async function registerUser({ username, password, displayName }, existingUsers =
     throw new Error('ユーザー名は英数字とアンダースコアのみ使用できます。');
   }
 
-  if (!password || typeof password !== 'string') {
+  if (!normalizedPassword) {
     throw new Error('パスワードは必須です。');
   }
 

@@ -88,6 +88,18 @@ const {
     registerUser(
       {
         username: 'valid_name',
+        password: '   ',
+        displayName: 'Blank Password',
+      },
+      existingUsers
+    ),
+    /パスワードは必須です/
+  );
+
+  await assert.rejects(
+    registerUser(
+      {
+        username: 'valid_name',
         password: 'ValidPass123!',
         displayName: '   ',
       },
