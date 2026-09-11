@@ -63,7 +63,10 @@ async function registerUser({ username, password, displayName }, existingUsers =
     createdAt: new Date().toISOString(),
   };
 
-  return newUser;
+  return {
+    user: newUser,
+    users: existingUsers.concat(newUser),
+  };
 }
 
 module.exports = {
@@ -79,7 +82,7 @@ if (require.main === module) {
 
     console.log('--- user registration demo start ---');
 
-    const registeredUser = await registerUser(
+    const { user: registeredUser, users: updatedUsers } = await registerUser(
       {
         username: 'Chart_Creator01',
         password: 'SuperSecurePass123!',
@@ -88,7 +91,7 @@ if (require.main === module) {
       users
     );
 
-    users = users.concat(registeredUser);
+    users = updatedUsers;
 
     const { hashedPassword, ...safeUserPreview } = registeredUser;
 
