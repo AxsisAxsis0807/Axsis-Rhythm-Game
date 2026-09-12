@@ -97,8 +97,69 @@ body {
 }
 
 .mania-select-layout {
-    width: min(820px, 100%);
+    width: min(1240px, 100%);
+    grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.45fr);
+    align-items: start;
     gap: 1.75rem;
+}
+
+.mania-select-main {
+    display: grid;
+    gap: 1.35rem;
+}
+
+.score-ranking-panel {
+    background: rgba(11, 14, 22, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    padding: 1.35rem;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.32);
+}
+
+.ranking-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+}
+
+.ranking-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.ranking-item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ranking-position {
+    width: 1.65rem;
+    text-align: center;
+    font-weight: 800;
+    color: #ffdc96;
+}
+
+.ranking-player {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+}
+
+.ranking-score {
+    color: rgba(167, 222, 255, 0.95);
+    font-size: 0.96rem;
+    letter-spacing: 0.03em;
 }
 
 .mania-select-topbar {
@@ -773,7 +834,8 @@ body {
 
     .hero-layout,
     .mode-select-grid,
-    .song-select-layout {
+    .song-select-layout,
+    .mania-select-layout {
         grid-template-columns: 1fr;
     }
 

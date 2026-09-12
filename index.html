@@ -79,52 +79,88 @@
     <section id="songSelect" class="screen song-select-screen has-bottom-nav" aria-labelledby="song-select-title" hidden>
       <div class="screen-overlay"></div>
       <div class="song-select-layout mania-select-layout">
-        <div class="mania-select-topbar">
-          <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
-          <div class="sort-box" aria-label="並び替え">
-            <span>Sort</span>
-            <div class="sort-input">ARTIST</div>
+        <aside class="score-ranking-panel" aria-label="スコアランキング">
+          <div class="ranking-header">
+            <p class="screen-label">Score Ranking</p>
+            <h2 class="ranking-title">RANKING</h2>
           </div>
-        </div>
+          <ol class="ranking-list">
+            <li class="ranking-item">
+              <span class="ranking-position">1</span>
+              <span class="ranking-player">Axsis</span>
+              <strong class="ranking-score">1,000,000</strong>
+            </li>
+            <li class="ranking-item">
+              <span class="ranking-position">2</span>
+              <span class="ranking-player">RhythmCat</span>
+              <strong class="ranking-score">985,240</strong>
+            </li>
+            <li class="ranking-item">
+              <span class="ranking-position">3</span>
+              <span class="ranking-player">FJDK</span>
+              <strong class="ranking-score">972,510</strong>
+            </li>
+            <li class="ranking-item">
+              <span class="ranking-position">4</span>
+              <span class="ranking-player">LaneBurst</span>
+              <strong class="ranking-score">951,900</strong>
+            </li>
+            <li class="ranking-item">
+              <span class="ranking-position">5</span>
+              <span class="ranking-player">BeatSky</span>
+              <strong class="ranking-score">934,120</strong>
+            </li>
+          </ol>
+        </aside>
 
-        <div class="mania-song-list" role="list" aria-label="楽曲一覧">
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">UNDERVEIL</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Morimori Atsushi</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">nevertoogone</span>
-          </button>
-          <button class="mania-song-card active" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Iyowa</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Plum</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Project Moon</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Xyris</span>
-          </button>
-        </div>
+        <div class="mania-select-main">
+          <div class="mania-select-topbar">
+            <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
+            <div class="sort-box" aria-label="並び替え">
+              <span>Sort</span>
+              <div class="sort-input">ARTIST</div>
+            </div>
+          </div>
 
-        <div class="mania-search-bar" aria-label="検索欄">
-          <span class="search-icon" aria-hidden="true">🔍</span>
-          <span>Search songs</span>
-        </div>
+          <div class="mania-song-list" role="list" aria-label="楽曲一覧">
+            <button class="mania-song-card" type="button" role="listitem">
+              <span class="song-arrow" aria-hidden="true">↗</span>
+              <span class="mania-song-name">UNDERVEIL</span>
+            </button>
+            <button class="mania-song-card" type="button" role="listitem">
+              <span class="song-arrow" aria-hidden="true">↗</span>
+              <span class="mania-song-name">Morimori Atsushi</span>
+            </button>
+            <button class="mania-song-card" type="button" role="listitem">
+              <span class="song-arrow" aria-hidden="true">↗</span>
+              <span class="mania-song-name">nevertoogone</span>
+            </button>
+            <button class="mania-song-card active" type="button" role="listitem">
+              <span class="song-arrow" aria-hidden="true">↗</span>
+              <span class="mania-song-name">Iyowa</span>
+            </button>
+            <button class="mania-song-card" type="button" role="listitem">
+              <span class="song-arrow" aria-hidden="true">↗</span>
+              <span class="mania-song-name">Plum</span>
+            </button>
+            <button class="mania-song-card" type="button" role="listitem">
+              <span class="song-arrow" aria-hidden="true">↗</span>
+              <span class="mania-song-name">Project Moon</span>
+            </button>
+            <button class="mania-song-card" type="button" role="listitem">
+              <span class="song-arrow" aria-hidden="true">↗</span>
+              <span class="mania-song-name">Xyris</span>
+            </button>
+          </div>
 
-        <div class="mania-select-actions">
-          <button class="menu-btn primary" type="button">START</button>
+          <div class="mania-search-bar" aria-label="検索欄">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <span>Search songs</span>
+          </div>
+
+          <div class="mania-select-actions">
+            <button class="menu-btn primary" type="button">START</button>
+          </div>
         </div>
       </div>
     </section>
