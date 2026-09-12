@@ -196,27 +196,27 @@
     </section>
 
     <nav id="bottomNav" class="bottom-nav" aria-label="メインナビゲーション" hidden>
-      <div class="bottom-nav-items" role="tablist" aria-label="画面タブ">
-        <button class="bottom-nav-btn" type="button" role="tab" aria-controls="modeSelect" data-screen-target="modeSelect">
+      <div class="bottom-nav-items">
+        <a class="bottom-nav-btn" href="#modeSelect" data-screen-target="modeSelect">
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
-        </button>
+        </a>
         <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達<span class="sr-only">（準備中）</span></span>
         </button>
-        <button class="bottom-nav-btn center-action" type="button" role="tab" aria-controls="songSelect" data-screen-target="songSelect">
+        <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
-        </button>
+        </a>
         <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ<span class="sr-only">（準備中）</span></span>
         </button>
-        <button class="bottom-nav-btn" type="button" role="tab" aria-controls="accountScreen" data-screen-target="accountScreen">
+        <a class="bottom-nav-btn" href="#accountScreen" data-screen-target="accountScreen">
           <span class="bottom-nav-icon" aria-hidden="true">◯</span>
           <span class="bottom-nav-label">プロフィール</span>
-        </button>
+        </a>
       </div>
       <div class="bottom-nav-progress" aria-hidden="true"></div>
     </nav>
@@ -244,7 +244,7 @@
     const screenButtons = document.querySelectorAll('[data-screen-target]');
     const bottomNav = document.getElementById('bottomNav');
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
-    const navButtons = document.querySelectorAll('.bottom-nav .bottom-nav-btn[data-screen-target]');
+    const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
 
     const showScreen = (targetId) => {
@@ -260,8 +260,11 @@
 
       navButtons.forEach((button) => {
         const isCurrent = button.dataset.screenTarget === targetId;
-        button.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
-        button.setAttribute('tabindex', isCurrent ? '0' : '-1');
+        if (isCurrent) {
+          button.setAttribute('aria-current', 'page');
+        } else {
+          button.removeAttribute('aria-current');
+        }
       });
 
       if (bottomNav) {
@@ -270,7 +273,8 @@
     };
 
     screenButtons.forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
         lockLandscape();
         showScreen(button.dataset.screenTarget);
       });

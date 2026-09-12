@@ -669,6 +669,7 @@ body {
     border: 0;
     background: transparent;
     color: rgba(255, 255, 255, 0.92);
+    text-decoration: none;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
