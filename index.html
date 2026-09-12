@@ -88,31 +88,31 @@
         </div>
 
         <div class="mania-song-list" role="list" aria-label="楽曲一覧">
-          <button class="mania-song-card" type="button" role="listitem">
+          <button class="mania-song-card" type="button" role="listitem" data-song-title="UNDERVEIL">
             <span class="song-arrow" aria-hidden="true">↗</span>
             <span class="mania-song-name">UNDERVEIL</span>
           </button>
-          <button class="mania-song-card" type="button" role="listitem">
+          <button class="mania-song-card" type="button" role="listitem" data-song-title="Morimori Atsushi">
             <span class="song-arrow" aria-hidden="true">↗</span>
             <span class="mania-song-name">Morimori Atsushi</span>
           </button>
-          <button class="mania-song-card" type="button" role="listitem">
+          <button class="mania-song-card" type="button" role="listitem" data-song-title="nevertoogone">
             <span class="song-arrow" aria-hidden="true">↗</span>
             <span class="mania-song-name">nevertoogone</span>
           </button>
-          <button class="mania-song-card active" type="button" role="listitem">
+          <button class="mania-song-card active" type="button" role="listitem" data-song-title="Iyowa" aria-pressed="true">
             <span class="song-arrow" aria-hidden="true">↗</span>
             <span class="mania-song-name">Iyowa</span>
           </button>
-          <button class="mania-song-card" type="button" role="listitem">
+          <button class="mania-song-card" type="button" role="listitem" data-song-title="Plum">
             <span class="song-arrow" aria-hidden="true">↗</span>
             <span class="mania-song-name">Plum</span>
           </button>
-          <button class="mania-song-card" type="button" role="listitem">
+          <button class="mania-song-card" type="button" role="listitem" data-song-title="Project Moon">
             <span class="song-arrow" aria-hidden="true">↗</span>
             <span class="mania-song-name">Project Moon</span>
           </button>
-          <button class="mania-song-card" type="button" role="listitem">
+          <button class="mania-song-card" type="button" role="listitem" data-song-title="Xyris">
             <span class="song-arrow" aria-hidden="true">↗</span>
             <span class="mania-song-name">Xyris</span>
           </button>
@@ -124,7 +124,7 @@
         </div>
 
         <div class="mania-select-actions">
-          <button class="menu-btn primary" type="button">START</button>
+          <button id="startGameButton" class="menu-btn primary" type="button" data-screen-target="gameScreen">START</button>
         </div>
       </div>
     </section>
@@ -163,49 +163,64 @@
         </div>
       </div>
     </section>
+
+    <section id="gameScreen" class="screen gameplay-screen" aria-labelledby="gameplay-title" hidden>
+      <div class="screen-overlay"></div>
+      <div class="gameplay-layout">
+        <div class="gameplay-copy">
+          <p class="screen-label">Now Playing</p>
+          <h2 id="gameplay-title">RHYTHM STAGE</h2>
+          <p class="hero-description">
+            選択した曲で簡易プレイ画面を開始します。D / F / J / K キーで流れてくるノーツを叩いてください。
+          </p>
+
+          <div class="gameplay-metadata">
+            <div class="detail-row">
+              <span>SONG</span>
+              <strong id="currentSongLabel">Iyowa</strong>
+            </div>
+            <div class="detail-row">
+              <span>STATUS</span>
+              <strong id="gameStatusLabel">Loading...</strong>
+            </div>
+          </div>
+
+          <div class="preview-actions">
+            <button class="menu-btn" type="button" data-screen-target="songSelect">BACK</button>
+          </div>
+        </div>
+
+        <div class="gameplay-panel">
+          <div class="gameplay-hud" aria-label="プレイ情報">
+            <div class="hud-card">
+              <span>Score</span>
+              <strong id="scoreValue">0</strong>
+            </div>
+            <div class="hud-card">
+              <span>Combo</span>
+              <strong id="comboValue">0</strong>
+            </div>
+            <div class="hud-card">
+              <span>Judge</span>
+              <strong id="judgeValue">Ready</strong>
+            </div>
+          </div>
+
+          <div class="game-canvas-frame">
+            <canvas id="gameCanvas" width="480" height="720" aria-label="リズムゲームプレイ画面"></canvas>
+          </div>
+
+          <div class="gameplay-keys" aria-label="操作キー">
+            <span class="key d-key">D</span>
+            <span class="key f-key">F</span>
+            <span class="key j-key">J</span>
+            <span class="key k-key">K</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <script>
-    const updateViewportSize = () => {
-      document.documentElement.style.setProperty('--viewport-width', `${window.innerWidth}px`);
-      document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
-    };
-
-    const lockLandscape = async () => {
-      if (!screen.orientation?.lock) {
-        return;
-      }
-
-      try {
-        await screen.orientation.lock('landscape');
-      } catch (error) {
-        // Some browsers only allow orientation lock in fullscreen or installed mode.
-      }
-    };
-
-    const screens = document.querySelectorAll('.screen');
-    const screenButtons = document.querySelectorAll('[data-screen-target]');
-
-    const showScreen = (targetId) => {
-      screens.forEach((screen) => {
-        const isTarget = screen.id === targetId;
-        screen.hidden = !isTarget;
-        screen.classList.toggle('is-active', isTarget);
-      });
-    };
-
-    screenButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        lockLandscape();
-        showScreen(button.dataset.screenTarget);
-      });
-    });
-
-    updateViewportSize();
-    lockLandscape();
-
-    window.addEventListener('resize', updateViewportSize);
-    window.addEventListener('orientationchange', updateViewportSize);
-  </script>
+  <script src="game.js"></script>
 </body>
 </html>
