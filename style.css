@@ -57,6 +57,7 @@ body {
     .screen {
         height: 100%;
         min-height: 100%;
+        box-sizing: border-box;
         padding: clamp(1.6rem, 2.7vw, 2.4rem);
     }
 }
