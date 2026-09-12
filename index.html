@@ -246,6 +246,15 @@
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
     const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
+    const resolveHashScreen = () => {
+      const targetId = window.location.hash.replace('#', '');
+      if (!screenIds.has(targetId)) {
+        return false;
+      }
+
+      showScreen(targetId);
+      return true;
+    };
 
     const showScreen = (targetId) => {
       if (!screenIds.has(targetId)) {
@@ -274,7 +283,11 @@
 
     screenButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
-        event.preventDefault();
+        if (button.tagName === 'A') {
+          event.preventDefault();
+          window.location.hash = button.dataset.screenTarget;
+        }
+
         lockLandscape();
         showScreen(button.dataset.screenTarget);
       });
@@ -285,6 +298,8 @@
 
     window.addEventListener('resize', updateViewportSize);
     window.addEventListener('orientationchange', updateViewportSize);
+    window.addEventListener('hashchange', resolveHashScreen);
+    resolveHashScreen();
   </script>
 </body>
 </html>
