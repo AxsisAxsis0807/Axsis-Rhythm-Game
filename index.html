@@ -323,10 +323,17 @@
 
       if (!resolveHashScreen()) {
         fallbackToMainMenu();
+        return;
       }
+
+      lockLandscape();
     });
-    if (window.location.hash && !resolveHashScreen()) {
-      fallbackToMainMenu();
+    if (window.location.hash) {
+      if (resolveHashScreen()) {
+        lockLandscape();
+      } else {
+        fallbackToMainMenu();
+      }
     }
   </script>
 </body>
