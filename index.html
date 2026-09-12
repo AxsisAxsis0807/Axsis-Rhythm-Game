@@ -201,7 +201,7 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
-        <div class="bottom-nav-placeholder" aria-label="友達（準備中）">
+        <div class="bottom-nav-placeholder" aria-hidden="true">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達<span class="sr-only">（準備中）</span></span>
         </div>
@@ -209,7 +209,7 @@
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </a>
-        <div class="bottom-nav-placeholder" aria-label="メッセージ（準備中）">
+        <div class="bottom-nav-placeholder" aria-hidden="true">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ<span class="sr-only">（準備中）</span></span>
         </div>
@@ -245,6 +245,7 @@
     const bottomNav = document.getElementById('bottomNav');
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
     const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
+    const navButtonSet = new Set(navButtons);
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
     const fallbackToMainMenu = () => {
       lockLandscape();
@@ -310,7 +311,7 @@
 
     screenButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
-        const isHashRoutedNav = button.tagName === 'A';
+        const isHashRoutedNav = navButtonSet.has(button);
         if (isHashRoutedNav) {
           event.preventDefault();
         }
