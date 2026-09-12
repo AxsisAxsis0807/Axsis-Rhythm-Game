@@ -683,16 +683,28 @@ body {
     cursor: default;
 }
 
-.bottom-nav-btn.is-placeholder {
+.bottom-nav-placeholder {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.35rem;
+    min-height: 84px;
+}
+
+.bottom-nav-btn.is-placeholder,
+.bottom-nav-placeholder {
     cursor: default;
     color: rgba(255, 255, 255, 0.78);
 }
 
-.bottom-nav-btn.is-placeholder .bottom-nav-icon {
+.bottom-nav-btn.is-placeholder .bottom-nav-icon,
+.bottom-nav-placeholder .bottom-nav-icon {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.bottom-nav-btn.is-placeholder .bottom-nav-label {
+.bottom-nav-btn.is-placeholder .bottom-nav-label,
+.bottom-nav-placeholder .bottom-nav-label {
     color: rgba(255, 255, 255, 0.74);
 }
 
@@ -892,6 +904,10 @@ body {
     }
 
     .bottom-nav-btn {
+        min-height: 72px;
+    }
+
+    .bottom-nav-placeholder {
         min-height: 72px;
     }
 

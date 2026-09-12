@@ -201,18 +201,18 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
-        <span class="bottom-nav-btn is-placeholder" aria-disabled="true" aria-label="友達（準備中）">
+        <div class="bottom-nav-placeholder" aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達<span class="sr-only">（準備中）</span></span>
-        </span>
+        </div>
         <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </a>
-        <span class="bottom-nav-btn is-placeholder" aria-disabled="true" aria-label="メッセージ（準備中）">
+        <div class="bottom-nav-placeholder" aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ<span class="sr-only">（準備中）</span></span>
-        </span>
+        </div>
         <a class="bottom-nav-btn" href="#accountScreen" data-screen-target="accountScreen">
           <span class="bottom-nav-icon" aria-hidden="true">◯</span>
           <span class="bottom-nav-label">プロフィール</span>
@@ -264,6 +264,24 @@
       showScreen(targetId);
       return true;
     };
+    const navigateToTarget = (targetId, routeViaHash = false) => {
+      if (!screenIds.has(targetId)) {
+        return;
+      }
+
+      lockLandscape();
+
+      if (routeViaHash && navScreenIds.has(targetId)) {
+        if (window.location.hash === `#${targetId}`) {
+          showScreen(targetId);
+        } else {
+          window.location.hash = targetId;
+        }
+        return;
+      }
+
+      showScreen(targetId);
+    };
 
     const showScreen = (targetId) => {
       if (!screenIds.has(targetId)) {
@@ -292,25 +310,13 @@
 
     screenButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
-        if (button.tagName === 'A') {
+        const isHashRoutedNav = button.tagName === 'A';
+        if (isHashRoutedNav) {
           event.preventDefault();
-          const targetId = button.dataset.screenTarget;
-
-          if (window.location.hash === `#${targetId}`) {
-            lockLandscape();
-            showScreen(targetId);
-            return;
-          }
-
-          window.location.hash = targetId;
-          lockLandscape();
-          return;
         }
-
-          lockLandscape();
-          showScreen(button.dataset.screenTarget);
-        });
+        navigateToTarget(button.dataset.screenTarget, isHashRoutedNav);
       });
+    });
 
     updateViewportSize();
     lockLandscape();
