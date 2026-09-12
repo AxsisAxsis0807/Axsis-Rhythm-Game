@@ -677,6 +677,11 @@ body {
     cursor: default;
 }
 
+.bottom-nav-btn.is-placeholder {
+    cursor: default;
+    opacity: 0.72;
+}
+
 .bottom-nav-icon {
     font-size: clamp(1.6rem, 2.8vw, 2.5rem);
     line-height: 1;
@@ -713,6 +718,18 @@ body {
     margin: 0.85rem auto 0;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.28);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 @media (max-width: 960px) {
