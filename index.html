@@ -335,7 +335,13 @@
     window.addEventListener('resize', updateViewportSize);
     window.addEventListener('orientationchange', updateViewportSize);
     window.addEventListener('hashchange', () => {
-      if (!window.location.hash || window.location.hash === '#') {
+      const targetId = window.location.hash.replace('#', '');
+      if (!targetId) {
+        fallbackToMainMenu();
+        return;
+      }
+
+      if (!navScreenIds.has(targetId)) {
         fallbackToMainMenu();
         return;
       }
@@ -348,7 +354,8 @@
       lockLandscape();
     });
     if (window.location.hash && window.location.hash !== '#') {
-      if (resolveHashScreen()) {
+      const initialTargetId = window.location.hash.replace('#', '');
+      if (navScreenIds.has(initialTargetId) && resolveHashScreen()) {
         lockLandscape();
       } else {
         fallbackToMainMenu();
