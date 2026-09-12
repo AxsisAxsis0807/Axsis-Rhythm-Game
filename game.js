@@ -145,6 +145,7 @@ const spawnNote = () => {
 };
 
 const registerMiss = () => {
+  gameState.score = Math.max(0, gameState.score - 250);
   gameState.combo = 0;
   updateHud();
   setJudge('MISS');
@@ -156,19 +157,27 @@ const judgeLane = (laneIndex) => {
   }
 
   const judgeLineY = canvas.height - 96;
-  const candidates = gameState.notes
-    .filter((note) => note.lane === laneIndex)
-    .sort(
-      (left, right) => Math.abs(left.y + left.height / 2 - judgeLineY) - Math.abs(right.y + right.height / 2 - judgeLineY)
-    );
+  let targetNote = null;
+  let closestDistance = Number.POSITIVE_INFINITY;
 
-  const targetNote = candidates[0];
+  for (const note of gameState.notes) {
+    if (note.lane !== laneIndex) {
+      continue;
+    }
+
+    const distance = Math.abs(note.y + note.height / 2 - judgeLineY);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      targetNote = note;
+    }
+  }
+
   if (!targetNote) {
     registerMiss();
     return;
   }
 
-  const distance = Math.abs(targetNote.y + targetNote.height / 2 - judgeLineY);
+  const distance = closestDistance;
   if (distance <= 26) {
     gameState.score += 1000;
     gameState.combo += 1;
