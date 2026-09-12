@@ -216,15 +216,15 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
-        <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-label="友達（準備中）">
+        <button class="bottom-nav-btn is-placeholder" type="button" aria-disabled="true" aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達 準備中</span>
         </button>
-        <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect">
+        <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect" aria-label="プレイ（楽曲選択画面）">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </a>
-        <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-label="メッセージ（準備中）">
+        <button class="bottom-nav-btn is-placeholder" type="button" aria-disabled="true" aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ 準備中</span>
         </button>
@@ -260,6 +260,7 @@
     const bottomNav = document.getElementById('bottomNav');
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
     const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
+    const disabledNavButtons = document.querySelectorAll('.bottom-nav .bottom-nav-btn[aria-disabled="true"]');
     const navButtonSet = new Set(navButtons);
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
     const fallbackToMainMenu = () => {
@@ -326,6 +327,15 @@
           event.preventDefault();
         }
         navigateToTarget(button.dataset.screenTarget, isHashRoutedNav);
+      });
+    });
+
+    disabledNavButtons.forEach((button) => {
+      button.addEventListener('click', (event) => event.preventDefault());
+      button.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+        }
       });
     });
 
