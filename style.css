@@ -45,10 +45,14 @@ body {
     position: relative;
     min-height: 100vh;
     overflow: hidden;
-    padding: 3rem 3rem var(--screen-bottom-padding);
+    padding: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.screen.has-bottom-nav {
+    padding-bottom: var(--screen-bottom-padding);
 }
 
 .screen[hidden] {
@@ -739,7 +743,11 @@ body {
     }
 
     .screen {
-        padding: 1.5rem 1.5rem var(--screen-bottom-padding);
+        padding: 1.5rem;
+    }
+
+    .screen.has-bottom-nav {
+        padding-bottom: var(--screen-bottom-padding);
     }
 
     .hero-layout,
