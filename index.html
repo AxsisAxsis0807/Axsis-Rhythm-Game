@@ -216,18 +216,18 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
-        <div class="bottom-nav-placeholder" aria-label="友達（準備中）">
+        <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達 準備中</span>
-        </div>
+        </button>
         <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </a>
-        <div class="bottom-nav-placeholder" aria-label="メッセージ（準備中）">
+        <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ 準備中</span>
-        </div>
+        </button>
         <a class="bottom-nav-btn" href="#accountScreen" data-screen-target="accountScreen">
           <span class="bottom-nav-icon" aria-hidden="true">◯</span>
           <span class="bottom-nav-label">プロフィール</span>
@@ -340,7 +340,6 @@
       }
 
       if (!resolveHashScreen()) {
-        fallbackToMainMenu();
         return;
       }
 
