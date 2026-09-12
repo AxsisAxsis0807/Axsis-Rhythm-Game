@@ -285,7 +285,15 @@
       button.addEventListener('click', (event) => {
         if (button.tagName === 'A') {
           event.preventDefault();
-          window.location.hash = button.dataset.screenTarget;
+          const targetId = button.dataset.screenTarget;
+
+          if (window.location.hash === `#${targetId}`) {
+            lockLandscape();
+            showScreen(targetId);
+            return;
+          }
+
+          window.location.hash = targetId;
           lockLandscape();
           return;
         }
@@ -301,7 +309,9 @@
     window.addEventListener('resize', updateViewportSize);
     window.addEventListener('orientationchange', updateViewportSize);
     window.addEventListener('hashchange', resolveHashScreen);
-    resolveHashScreen();
+    if (!resolveHashScreen()) {
+      showScreen('mainMenu');
+    }
   </script>
 </body>
 </html>
