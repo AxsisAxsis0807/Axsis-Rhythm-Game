@@ -336,6 +336,7 @@
     window.addEventListener('orientationchange', updateViewportSize);
     window.addEventListener('hashchange', () => {
       if (!window.location.hash || window.location.hash === '#') {
+        fallbackToMainMenu();
         return;
       }
 
