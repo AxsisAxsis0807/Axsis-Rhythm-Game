@@ -260,7 +260,11 @@
 
       navButtons.forEach((button) => {
         const isCurrent = button.dataset.screenTarget === targetId;
-        button.toggleAttribute('aria-current', isCurrent);
+        if (isCurrent) {
+          button.setAttribute('aria-current', 'page');
+        } else {
+          button.removeAttribute('aria-current');
+        }
       });
 
       if (bottomNav) {
