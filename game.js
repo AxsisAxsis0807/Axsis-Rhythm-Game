@@ -53,18 +53,18 @@ const showScreen = (targetId) => {
     return;
   }
 
+  screens.forEach((screenElement) => {
+    const isTarget = screenElement.id === targetId;
+    screenElement.hidden = !isTarget;
+    screenElement.classList.toggle('is-active', isTarget);
+  });
+
   if (targetId === 'gameScreen') {
     currentSongLabel.textContent = selectedSongTitle;
     startGame();
   } else if (gameState.running) {
     stopGame();
   }
-
-  screens.forEach((screenElement) => {
-    const isTarget = screenElement.id === targetId;
-    screenElement.hidden = !isTarget;
-    screenElement.classList.toggle('is-active', isTarget);
-  });
 };
 
 const setSelectedSong = (songCard) => {
@@ -358,4 +358,7 @@ window.addEventListener('resize', () => {
   updateViewportSize();
   drawGame();
 });
-window.addEventListener('orientationchange', updateViewportSize);
+window.addEventListener('orientationchange', () => {
+  updateViewportSize();
+  drawGame();
+});
