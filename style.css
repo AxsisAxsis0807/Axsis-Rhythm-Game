@@ -692,6 +692,23 @@ body {
     }
 }
 
+@media (orientation: landscape) {
+    body {
+        padding: clamp(0.75rem, 1.8vw, 1.5rem);
+    }
+
+    #app {
+        width: min(96vw, 1520px);
+        margin: 0 auto;
+    }
+
+    .screen {
+        min-height: min(94vh, 900px);
+        box-sizing: border-box;
+        padding: clamp(1.6rem, 2.7vw, 2.4rem);
+    }
+}
+
 @media (max-width: 640px) {
     .hero-copy h1 {
         font-size: 2.5rem;
