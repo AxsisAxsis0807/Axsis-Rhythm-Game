@@ -45,7 +45,7 @@
       </div>
     </section>
 
-    <section id="modeSelect" class="screen mode-select-screen" aria-labelledby="mode-select-title" hidden>
+    <section id="modeSelect" class="screen mode-select-screen has-bottom-nav" aria-labelledby="mode-select-title" hidden>
       <div class="screen-overlay"></div>
       <div class="mode-select-layout">
         <div class="mode-select-copy">
@@ -76,55 +76,70 @@
       </div>
     </section>
 
-    <section id="songSelect" class="screen song-select-screen" aria-labelledby="song-select-title" hidden>
+    <section id="songSelect" class="screen song-select-screen has-bottom-nav" aria-labelledby="song-select-title" hidden>
       <div class="screen-overlay"></div>
       <div class="song-select-layout mania-select-layout">
-        <div class="mania-select-topbar">
-          <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
-          <div class="sort-box" aria-label="並び替え">
-            <span>Sort</span>
-            <div class="sort-input">ARTIST</div>
+        <aside class="score-ranking-panel" aria-label="スコアランキング">
+          <div class="ranking-header">
+            <p class="screen-label">Score Ranking</p>
+            <h2 class="ranking-title">RANKING</h2>
           </div>
-        </div>
+          <ol class="ranking-list">
+            <li class="ranking-item">
+              <span class="ranking-position">1</span>
+              <span class="ranking-player">Axsis</span>
+              <strong class="ranking-score">1,000,000</strong>
+            </li>
+            <li class="ranking-item">
+              <span class="ranking-position">2</span>
+              <span class="ranking-player">RhythmCat</span>
+              <strong class="ranking-score">985,240</strong>
+            </li>
+            <li class="ranking-item">
+              <span class="ranking-position">3</span>
+              <span class="ranking-player">FJDK</span>
+              <strong class="ranking-score">972,510</strong>
+            </li>
+            <li class="ranking-item">
+              <span class="ranking-position">4</span>
+              <span class="ranking-player">LaneBurst</span>
+              <strong class="ranking-score">951,900</strong>
+            </li>
+            <li class="ranking-item">
+              <span class="ranking-position">5</span>
+              <span class="ranking-player">BeatSky</span>
+              <strong class="ranking-score">934,120</strong>
+            </li>
+          </ol>
+        </aside>
 
-        <div class="mania-song-list" role="list" aria-label="楽曲一覧">
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">UNDERVEIL</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Morimori Atsushi</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">nevertoogone</span>
-          </button>
-          <button class="mania-song-card active" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Iyowa</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Plum</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Project Moon</span>
-          </button>
-          <button class="mania-song-card" type="button" role="listitem">
-            <span class="song-arrow" aria-hidden="true">↗</span>
-            <span class="mania-song-name">Xyris</span>
-          </button>
-        </div>
+        <div class="mania-select-main">
+          <div class="mania-select-topbar">
+            <button class="menu-btn" type="button" data-screen-target="modeSelect">BACK</button>
+            <div class="sort-box" aria-label="並び替え">
+              <span>Sort</span>
+              <div class="sort-input">ARTIST</div>
+            </div>
+          </div>
 
-        <div class="mania-search-bar" aria-label="検索欄">
-          <span class="search-icon" aria-hidden="true">🔍</span>
-          <span>Search songs</span>
-        </div>
+          <ul class="mania-song-list" aria-label="楽曲一覧">
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">UNDERVEIL</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Morimori Atsushi</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">nevertoogone</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card active" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Iyowa</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Plum</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Project Moon</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Xyris</span></button></li>
+          </ul>
 
-        <div class="mania-select-actions">
-          <button class="menu-btn primary" type="button">START</button>
+          <div class="mania-search-bar" aria-label="検索欄">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <span>Search songs</span>
+          </div>
+
+          <div class="mania-select-actions">
+            <button class="menu-btn primary" type="button">START</button>
+          </div>
         </div>
       </div>
     </section>
@@ -163,6 +178,63 @@
         </div>
       </div>
     </section>
+
+    <section id="accountScreen" class="screen options-screen has-bottom-nav" aria-labelledby="account-title" hidden>
+      <div class="screen-overlay"></div>
+      <div class="options-layout">
+        <div class="options-panel">
+          <div class="browser-header">
+            <p class="screen-label">My Account</p>
+            <h2 id="account-title">プロフィール</h2>
+          </div>
+
+          <div class="preview-details">
+            <div class="detail-row">
+              <span>PLAYER NAME</span>
+              <strong>Axsis</strong>
+            </div>
+            <div class="detail-row">
+              <span>RANK</span>
+              <strong>Beginner</strong>
+            </div>
+            <div class="detail-row">
+              <span>PLAY COUNT</span>
+              <strong>000</strong>
+            </div>
+            <div class="detail-row">
+              <span>STATUS</span>
+              <strong>ONLINE</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav id="bottomNav" class="bottom-nav" aria-label="メインナビゲーション" hidden>
+      <div class="bottom-nav-items">
+        <a class="bottom-nav-btn" href="#modeSelect" data-screen-target="modeSelect">
+          <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
+          <span class="bottom-nav-label">ホーム</span>
+        </a>
+        <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-disabled="true" aria-label="友達（準備中）">
+          <span class="bottom-nav-icon" aria-hidden="true">👥</span>
+          <span class="bottom-nav-label">友達 準備中</span>
+        </button>
+        <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect" aria-label="プレイ（楽曲選択画面）">
+          <span class="bottom-nav-icon" aria-hidden="true">＋</span>
+          <span class="bottom-nav-label">プレイ</span>
+        </a>
+        <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-disabled="true" aria-label="メッセージ（準備中）">
+          <span class="bottom-nav-icon" aria-hidden="true">✉</span>
+          <span class="bottom-nav-label">メッセージ 準備中</span>
+        </button>
+        <a class="bottom-nav-btn" href="#accountScreen" data-screen-target="accountScreen">
+          <span class="bottom-nav-icon" aria-hidden="true">◯</span>
+          <span class="bottom-nav-label">プロフィール</span>
+        </a>
+      </div>
+      <div class="bottom-nav-progress" aria-hidden="true"></div>
+    </nav>
   </main>
 
   <script>
@@ -185,19 +257,75 @@
 
     const screens = document.querySelectorAll('.screen');
     const screenButtons = document.querySelectorAll('[data-screen-target]');
+    const bottomNav = document.getElementById('bottomNav');
+    const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
+    const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
+    const navButtonSet = new Set(navButtons);
+    const screenIds = new Set(Array.from(screens, (screen) => screen.id));
+    const fallbackToMainMenu = () => {
+      lockLandscape();
+      showScreen('mainMenu');
+    };
+    const resolveHashScreen = () => {
+      const targetId = window.location.hash.replace('#', '');
+      if (!screenIds.has(targetId)) {
+        return false;
+      }
+
+      showScreen(targetId);
+      return true;
+    };
+    const navigateToTarget = (targetId, routeViaHash = false) => {
+      if (!screenIds.has(targetId)) {
+        return;
+      }
+
+      lockLandscape();
+
+      if (routeViaHash && navScreenIds.has(targetId)) {
+        if (window.location.hash === `#${targetId}`) {
+          showScreen(targetId);
+        } else {
+          window.location.hash = targetId;
+        }
+        return;
+      }
+
+      showScreen(targetId);
+    };
 
     const showScreen = (targetId) => {
+      if (!screenIds.has(targetId)) {
+        return;
+      }
+
       screens.forEach((screen) => {
         const isTarget = screen.id === targetId;
         screen.hidden = !isTarget;
         screen.classList.toggle('is-active', isTarget);
       });
+
+      navButtons.forEach((button) => {
+        const isCurrent = button.dataset.screenTarget === targetId;
+        if (isCurrent) {
+          button.setAttribute('aria-current', 'location');
+        } else {
+          button.removeAttribute('aria-current');
+        }
+      });
+
+      if (bottomNav) {
+        bottomNav.hidden = !navScreenIds.has(targetId);
+      }
     };
 
     screenButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        lockLandscape();
-        showScreen(button.dataset.screenTarget);
+      button.addEventListener('click', (event) => {
+        const isHashRoutedNav = navButtonSet.has(button);
+        if (isHashRoutedNav) {
+          event.preventDefault();
+        }
+        navigateToTarget(button.dataset.screenTarget, isHashRoutedNav);
       });
     });
 
@@ -206,6 +334,34 @@
 
     window.addEventListener('resize', updateViewportSize);
     window.addEventListener('orientationchange', updateViewportSize);
+    window.addEventListener('hashchange', () => {
+      const targetId = window.location.hash.replace('#', '');
+      if (!targetId) {
+        fallbackToMainMenu();
+        return;
+      }
+
+      if (!screenIds.has(targetId)) {
+        return;
+      }
+
+      if (!resolveHashScreen()) {
+        fallbackToMainMenu();
+        return;
+      }
+
+      lockLandscape();
+    });
+    if (window.location.hash && window.location.hash !== '#') {
+      const initialTargetId = window.location.hash.replace('#', '');
+      if (screenIds.has(initialTargetId) && resolveHashScreen()) {
+        lockLandscape();
+      } else {
+        fallbackToMainMenu();
+      }
+    } else {
+      fallbackToMainMenu();
+    }
   </script>
 </body>
 </html>
