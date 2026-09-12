@@ -244,12 +244,23 @@
     const screenButtons = document.querySelectorAll('[data-screen-target]');
     const bottomNav = document.getElementById('bottomNav');
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
+    const navButtons = document.querySelectorAll('.bottom-nav .bottom-nav-btn[data-screen-target]');
+    const screenIds = new Set(Array.from(screens, (screen) => screen.id));
 
     const showScreen = (targetId) => {
+      if (!screenIds.has(targetId)) {
+        return;
+      }
+
       screens.forEach((screen) => {
         const isTarget = screen.id === targetId;
         screen.hidden = !isTarget;
         screen.classList.toggle('is-active', isTarget);
+      });
+
+      navButtons.forEach((button) => {
+        const isCurrent = button.dataset.screenTarget === targetId;
+        button.toggleAttribute('aria-current', isCurrent);
       });
 
       if (bottomNav) {
