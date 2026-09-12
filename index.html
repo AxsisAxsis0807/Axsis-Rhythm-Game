@@ -212,7 +212,7 @@
 
     <nav id="bottomNav" class="bottom-nav" aria-label="メインナビゲーション" hidden>
       <div class="bottom-nav-items">
-        <a class="bottom-nav-btn" href="#modeSelect" data-screen-target="modeSelect" aria-current="page">
+        <a class="bottom-nav-btn" href="#modeSelect" data-screen-target="modeSelect">
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
@@ -350,6 +350,7 @@
       }
 
       if (!resolveHashScreen()) {
+        fallbackToMainMenu();
         return;
       }
 
