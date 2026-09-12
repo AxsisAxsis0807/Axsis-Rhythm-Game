@@ -286,6 +286,8 @@
         if (button.tagName === 'A') {
           event.preventDefault();
           window.location.hash = button.dataset.screenTarget;
+          lockLandscape();
+          return;
         }
 
         lockLandscape();
