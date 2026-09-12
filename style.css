@@ -50,11 +50,13 @@ body {
 
     #app {
         width: min(96vw, 1520px);
-        min-height: min(94vh, 900px);
+        height: min(94vh, 900px);
+        min-height: 0;
     }
 
     .screen {
-        min-height: min(94vh, 900px);
+        height: 100%;
+        min-height: 100%;
         padding: clamp(1.6rem, 2.7vw, 2.4rem);
     }
 }
