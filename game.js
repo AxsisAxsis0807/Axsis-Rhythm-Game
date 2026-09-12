@@ -151,7 +151,7 @@ const registerMiss = () => {
 };
 
 const judgeLane = (laneIndex) => {
-  if (!gameState.running) {
+  if (!gameState.running || !canvas) {
     return;
   }
 
@@ -187,14 +187,19 @@ const judgeLane = (laneIndex) => {
 };
 
 const updateNotes = (deltaTime) => {
+  if (!canvas) {
+    return;
+  }
+
   const judgeLineY = canvas.height - 96;
   const nextNotes = [];
+  let missedNote = false;
 
   for (const note of gameState.notes) {
     const nextY = note.y + deltaTime * 0.3;
 
     if (nextY > judgeLineY + 72) {
-      registerMiss();
+      missedNote = true;
       continue;
     }
 
@@ -205,6 +210,10 @@ const updateNotes = (deltaTime) => {
   }
 
   gameState.notes = nextNotes;
+
+  if (missedNote) {
+    registerMiss();
+  }
 };
 
 const drawRoundedRect = (x, y, width, height, radius, fillStyle, strokeStyle = null) => {
@@ -226,7 +235,7 @@ const drawRoundedRect = (x, y, width, height, radius, fillStyle, strokeStyle = n
 };
 
 const drawGame = () => {
-  if (!context) {
+  if (!context || !canvas) {
     return;
   }
 
