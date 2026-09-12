@@ -122,36 +122,15 @@
             </div>
           </div>
 
-          <div class="mania-song-list" aria-label="楽曲一覧">
-            <button class="mania-song-card" type="button">
-              <span class="song-arrow" aria-hidden="true">↗</span>
-              <span class="mania-song-name">UNDERVEIL</span>
-            </button>
-            <button class="mania-song-card" type="button">
-              <span class="song-arrow" aria-hidden="true">↗</span>
-              <span class="mania-song-name">Morimori Atsushi</span>
-            </button>
-            <button class="mania-song-card" type="button">
-              <span class="song-arrow" aria-hidden="true">↗</span>
-              <span class="mania-song-name">nevertoogone</span>
-            </button>
-            <button class="mania-song-card active" type="button">
-              <span class="song-arrow" aria-hidden="true">↗</span>
-              <span class="mania-song-name">Iyowa</span>
-            </button>
-            <button class="mania-song-card" type="button">
-              <span class="song-arrow" aria-hidden="true">↗</span>
-              <span class="mania-song-name">Plum</span>
-            </button>
-            <button class="mania-song-card" type="button">
-              <span class="song-arrow" aria-hidden="true">↗</span>
-              <span class="mania-song-name">Project Moon</span>
-            </button>
-            <button class="mania-song-card" type="button">
-              <span class="song-arrow" aria-hidden="true">↗</span>
-              <span class="mania-song-name">Xyris</span>
-            </button>
-          </div>
+          <ul class="mania-song-list" aria-label="楽曲一覧">
+            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">UNDERVEIL</span></button></li>
+            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Morimori Atsushi</span></button></li>
+            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">nevertoogone</span></button></li>
+            <li><button class="mania-song-card active" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Iyowa</span></button></li>
+            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Plum</span></button></li>
+            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Project Moon</span></button></li>
+            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Xyris</span></button></li>
+          </ul>
 
           <div class="mania-search-bar" aria-label="検索欄">
             <span class="search-icon" aria-hidden="true">🔍</span>
@@ -237,17 +216,17 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
-        <div class="bottom-nav-placeholder" role="img" aria-label="友達（準備中）">
+        <div class="bottom-nav-placeholder" aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
-          <span class="bottom-nav-label">友達</span>
+          <span class="bottom-nav-label">友達 準備中</span>
         </div>
         <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </a>
-        <div class="bottom-nav-placeholder" role="img" aria-label="メッセージ（準備中）">
+        <div class="bottom-nav-placeholder" aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
-          <span class="bottom-nav-label">メッセージ</span>
+          <span class="bottom-nav-label">メッセージ 準備中</span>
         </div>
         <a class="bottom-nav-btn" href="#accountScreen" data-screen-target="accountScreen">
           <span class="bottom-nav-icon" aria-hidden="true">◯</span>
@@ -286,11 +265,6 @@
     const fallbackToMainMenu = () => {
       lockLandscape();
       showScreen('mainMenu');
-      if (window.location.hash) {
-        const nextUrl = new URL(window.location.href);
-        nextUrl.hash = '';
-        history.replaceState(null, '', nextUrl.toString());
-      }
     };
     const resolveHashScreen = () => {
       const targetId = window.location.hash.replace('#', '');
