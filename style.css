@@ -18,6 +18,7 @@
     --primary: #8fb1d9;
     --accent: #c99ab0;
     --glow: 0 16px 36px rgba(0, 0, 0, 0.24);
+    --screen-bottom-padding: 9rem;
 }
 
 html {
@@ -44,7 +45,7 @@ body {
     position: relative;
     min-height: 100vh;
     overflow: hidden;
-    padding: 3rem 3rem 9rem;
+    padding: 3rem 3rem var(--screen-bottom-padding);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -733,8 +734,12 @@ body {
 }
 
 @media (max-width: 960px) {
+    :root {
+        --screen-bottom-padding: 8.5rem;
+    }
+
     .screen {
-        padding: 1.5rem 1.5rem 8.5rem;
+        padding: 1.5rem 1.5rem var(--screen-bottom-padding);
     }
 
     .hero-layout,
@@ -805,8 +810,8 @@ body {
 }
 
 @media (max-width: 640px) {
-    .screen {
-        padding-bottom: 8rem;
+    :root {
+        --screen-bottom-padding: 8rem;
     }
 
     .hero-copy h1 {
