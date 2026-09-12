@@ -201,18 +201,18 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
-        <button class="bottom-nav-btn is-placeholder" type="button" aria-disabled="true" aria-label="友達（準備中）">
+        <div class="bottom-nav-btn is-placeholder" role="note" aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達<span class="sr-only">（準備中）</span></span>
-        </button>
+        </div>
         <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </a>
-        <button class="bottom-nav-btn is-placeholder" type="button" aria-disabled="true" aria-label="メッセージ（準備中）">
+        <div class="bottom-nav-btn is-placeholder" role="note" aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ<span class="sr-only">（準備中）</span></span>
-        </button>
+        </div>
         <a class="bottom-nav-btn" href="#accountScreen" data-screen-target="accountScreen">
           <span class="bottom-nav-icon" aria-hidden="true">◯</span>
           <span class="bottom-nav-label">プロフィール</span>
@@ -245,7 +245,6 @@
     const bottomNav = document.getElementById('bottomNav');
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
     const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
-    const placeholderButtons = document.querySelectorAll('.bottom-nav .bottom-nav-btn[aria-disabled="true"]');
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
     const fallbackToMainMenu = () => {
       showScreen('mainMenu');
@@ -309,15 +308,6 @@
 
         lockLandscape();
         showScreen(button.dataset.screenTarget);
-      });
-    });
-
-    placeholderButtons.forEach((button) => {
-      button.addEventListener('click', (event) => event.preventDefault());
-      button.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-        }
       });
     });
 
