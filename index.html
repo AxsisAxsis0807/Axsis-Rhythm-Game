@@ -260,11 +260,7 @@
 
       navButtons.forEach((button) => {
         const isCurrent = button.dataset.screenTarget === targetId;
-        if (isCurrent) {
-          button.setAttribute('aria-current', 'page');
-        } else {
-          button.removeAttribute('aria-current');
-        }
+        button.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
       });
 
       if (bottomNav) {
