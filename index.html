@@ -201,18 +201,18 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </button>
-        <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-label="友達（準備中）">
+        <div class="bottom-nav-btn is-placeholder" role="button" tabindex="0" aria-disabled="true" aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達<span class="sr-only">（準備中）</span></span>
-        </button>
+        </div>
         <button class="bottom-nav-btn center-action" type="button" data-screen-target="songSelect">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </button>
-        <button class="bottom-nav-btn is-placeholder" type="button" disabled aria-label="メッセージ（準備中）">
+        <div class="bottom-nav-btn is-placeholder" role="button" tabindex="0" aria-disabled="true" aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ<span class="sr-only">（準備中）</span></span>
-        </button>
+        </div>
         <button class="bottom-nav-btn" type="button" data-screen-target="accountScreen">
           <span class="bottom-nav-icon" aria-hidden="true">◯</span>
           <span class="bottom-nav-label">プロフィール</span>
@@ -245,6 +245,7 @@
     const bottomNav = document.getElementById('bottomNav');
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
     const navButtons = document.querySelectorAll('.bottom-nav .bottom-nav-btn[data-screen-target]');
+    const placeholderNavItems = document.querySelectorAll('.bottom-nav .bottom-nav-btn[aria-disabled="true"]');
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
 
     const showScreen = (targetId) => {
@@ -276,6 +277,15 @@
       button.addEventListener('click', () => {
         lockLandscape();
         showScreen(button.dataset.screenTarget);
+      });
+    });
+
+    placeholderNavItems.forEach((item) => {
+      item.addEventListener('click', (event) => event.preventDefault());
+      item.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+        }
       });
     });
 
