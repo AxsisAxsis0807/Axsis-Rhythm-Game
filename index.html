@@ -196,8 +196,8 @@
     </section>
 
     <nav id="bottomNav" class="bottom-nav" aria-label="メインナビゲーション" hidden>
-      <div class="bottom-nav-items">
-        <button class="bottom-nav-btn" type="button" data-screen-target="modeSelect">
+      <div class="bottom-nav-items" role="tablist" aria-label="画面タブ">
+        <button class="bottom-nav-btn" type="button" role="tab" aria-controls="modeSelect" data-screen-target="modeSelect">
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </button>
@@ -205,7 +205,7 @@
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達<span class="sr-only">（準備中）</span></span>
         </button>
-        <button class="bottom-nav-btn center-action" type="button" data-screen-target="songSelect">
+        <button class="bottom-nav-btn center-action" type="button" role="tab" aria-controls="songSelect" data-screen-target="songSelect">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </button>
@@ -213,7 +213,7 @@
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ<span class="sr-only">（準備中）</span></span>
         </button>
-        <button class="bottom-nav-btn" type="button" data-screen-target="accountScreen">
+        <button class="bottom-nav-btn" type="button" role="tab" aria-controls="accountScreen" data-screen-target="accountScreen">
           <span class="bottom-nav-icon" aria-hidden="true">◯</span>
           <span class="bottom-nav-label">プロフィール</span>
         </button>
@@ -260,7 +260,8 @@
 
       navButtons.forEach((button) => {
         const isCurrent = button.dataset.screenTarget === targetId;
-        button.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+        button.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        button.setAttribute('tabindex', isCurrent ? '0' : '-1');
       });
 
       if (bottomNav) {
