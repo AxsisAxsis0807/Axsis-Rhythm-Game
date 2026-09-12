@@ -197,7 +197,7 @@
 
     <nav id="bottomNav" class="bottom-nav" aria-label="メインナビゲーション" hidden>
       <div class="bottom-nav-items">
-        <a class="bottom-nav-btn" href="#modeSelect" data-screen-target="modeSelect">
+        <a class="bottom-nav-btn" href="#modeSelect" data-screen-target="modeSelect" aria-current="page">
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
@@ -308,7 +308,11 @@
 
     window.addEventListener('resize', updateViewportSize);
     window.addEventListener('orientationchange', updateViewportSize);
-    window.addEventListener('hashchange', resolveHashScreen);
+    window.addEventListener('hashchange', () => {
+      if (!resolveHashScreen()) {
+        showScreen('mainMenu');
+      }
+    });
     if (!resolveHashScreen()) {
       showScreen('mainMenu');
     }
