@@ -163,6 +163,63 @@
         </div>
       </div>
     </section>
+
+    <section id="accountScreen" class="screen options-screen" aria-labelledby="account-title" hidden>
+      <div class="screen-overlay"></div>
+      <div class="options-layout">
+        <div class="options-panel">
+          <div class="browser-header">
+            <p class="screen-label">My Account</p>
+            <h2 id="account-title">プロフィール</h2>
+          </div>
+
+          <div class="preview-details">
+            <div class="detail-row">
+              <span>PLAYER NAME</span>
+              <strong>Axsis</strong>
+            </div>
+            <div class="detail-row">
+              <span>RANK</span>
+              <strong>Beginner</strong>
+            </div>
+            <div class="detail-row">
+              <span>PLAY COUNT</span>
+              <strong>000</strong>
+            </div>
+            <div class="detail-row">
+              <span>STATUS</span>
+              <strong>ONLINE</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav id="bottomNav" class="bottom-nav" aria-label="メインナビゲーション" hidden>
+      <div class="bottom-nav-items">
+        <button class="bottom-nav-btn" type="button" data-screen-target="modeSelect">
+          <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
+          <span class="bottom-nav-label">ホーム</span>
+        </button>
+        <button class="bottom-nav-btn" type="button" disabled>
+          <span class="bottom-nav-icon" aria-hidden="true">👥</span>
+          <span class="bottom-nav-label">友達</span>
+        </button>
+        <button class="bottom-nav-btn center-action" type="button" data-screen-target="songSelect">
+          <span class="bottom-nav-icon" aria-hidden="true">＋</span>
+          <span class="bottom-nav-label">プレイ</span>
+        </button>
+        <button class="bottom-nav-btn" type="button" disabled>
+          <span class="bottom-nav-icon" aria-hidden="true">✉</span>
+          <span class="bottom-nav-label">メッセージ</span>
+        </button>
+        <button class="bottom-nav-btn" type="button" data-screen-target="accountScreen">
+          <span class="bottom-nav-icon" aria-hidden="true">◯</span>
+          <span class="bottom-nav-label">プロフィール</span>
+        </button>
+      </div>
+      <div class="bottom-nav-progress" aria-hidden="true"></div>
+    </nav>
   </main>
 
   <script>
@@ -185,6 +242,7 @@
 
     const screens = document.querySelectorAll('.screen');
     const screenButtons = document.querySelectorAll('[data-screen-target]');
+    const bottomNav = document.getElementById('bottomNav');
 
     const showScreen = (targetId) => {
       screens.forEach((screen) => {
@@ -192,6 +250,10 @@
         screen.hidden = !isTarget;
         screen.classList.toggle('is-active', isTarget);
       });
+
+      if (bottomNav) {
+        bottomNav.hidden = targetId === 'mainMenu';
+      }
     };
 
     screenButtons.forEach((button) => {
