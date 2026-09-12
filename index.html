@@ -122,32 +122,32 @@
             </div>
           </div>
 
-          <div class="mania-song-list" role="list" aria-label="楽曲一覧">
-            <button class="mania-song-card" type="button" role="listitem">
+          <div class="mania-song-list" aria-label="楽曲一覧">
+            <button class="mania-song-card" type="button">
               <span class="song-arrow" aria-hidden="true">↗</span>
               <span class="mania-song-name">UNDERVEIL</span>
             </button>
-            <button class="mania-song-card" type="button" role="listitem">
+            <button class="mania-song-card" type="button">
               <span class="song-arrow" aria-hidden="true">↗</span>
               <span class="mania-song-name">Morimori Atsushi</span>
             </button>
-            <button class="mania-song-card" type="button" role="listitem">
+            <button class="mania-song-card" type="button">
               <span class="song-arrow" aria-hidden="true">↗</span>
               <span class="mania-song-name">nevertoogone</span>
             </button>
-            <button class="mania-song-card active" type="button" role="listitem">
+            <button class="mania-song-card active" type="button">
               <span class="song-arrow" aria-hidden="true">↗</span>
               <span class="mania-song-name">Iyowa</span>
             </button>
-            <button class="mania-song-card" type="button" role="listitem">
+            <button class="mania-song-card" type="button">
               <span class="song-arrow" aria-hidden="true">↗</span>
               <span class="mania-song-name">Plum</span>
             </button>
-            <button class="mania-song-card" type="button" role="listitem">
+            <button class="mania-song-card" type="button">
               <span class="song-arrow" aria-hidden="true">↗</span>
               <span class="mania-song-name">Project Moon</span>
             </button>
-            <button class="mania-song-card" type="button" role="listitem">
+            <button class="mania-song-card" type="button">
               <span class="song-arrow" aria-hidden="true">↗</span>
               <span class="mania-song-name">Xyris</span>
             </button>
@@ -237,7 +237,7 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
-        <div class="bottom-nav-placeholder" aria-hidden="true">
+        <div class="bottom-nav-placeholder" role="img" aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達</span>
         </div>
@@ -245,7 +245,7 @@
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </a>
-        <div class="bottom-nav-placeholder" aria-hidden="true">
+        <div class="bottom-nav-placeholder" role="img" aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ</span>
         </div>
@@ -362,10 +362,6 @@
     window.addEventListener('orientationchange', updateViewportSize);
     window.addEventListener('hashchange', () => {
       if (!window.location.hash || window.location.hash === '#') {
-        const activeScreenId = document.querySelector('.screen.is-active')?.id;
-        if (activeScreenId && navScreenIds.has(activeScreenId)) {
-          fallbackToMainMenu();
-        }
         return;
       }
 
