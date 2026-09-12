@@ -201,18 +201,18 @@
           <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
           <span class="bottom-nav-label">ホーム</span>
         </a>
-        <a class="bottom-nav-btn is-placeholder" href="#" aria-disabled="true" aria-label="友達（準備中）">
+        <span class="bottom-nav-btn is-placeholder" aria-disabled="true" aria-label="友達（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">👥</span>
           <span class="bottom-nav-label">友達<span class="sr-only">（準備中）</span></span>
-        </a>
+        </span>
         <a class="bottom-nav-btn center-action" href="#songSelect" data-screen-target="songSelect">
           <span class="bottom-nav-icon" aria-hidden="true">＋</span>
           <span class="bottom-nav-label">プレイ</span>
         </a>
-        <a class="bottom-nav-btn is-placeholder" href="#" aria-disabled="true" aria-label="メッセージ（準備中）">
+        <span class="bottom-nav-btn is-placeholder" aria-disabled="true" aria-label="メッセージ（準備中）">
           <span class="bottom-nav-icon" aria-hidden="true">✉</span>
           <span class="bottom-nav-label">メッセージ<span class="sr-only">（準備中）</span></span>
-        </a>
+        </span>
         <a class="bottom-nav-btn" href="#accountScreen" data-screen-target="accountScreen">
           <span class="bottom-nav-icon" aria-hidden="true">◯</span>
           <span class="bottom-nav-label">プロフィール</span>
@@ -245,7 +245,6 @@
     const bottomNav = document.getElementById('bottomNav');
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
     const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
-    const disabledNavItems = document.querySelectorAll('.bottom-nav a[aria-disabled="true"]');
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
     const fallbackToMainMenu = () => {
       lockLandscape();
@@ -258,7 +257,7 @@
     };
     const resolveHashScreen = () => {
       const targetId = window.location.hash.replace('#', '');
-      if (!screenIds.has(targetId)) {
+      if (!screenIds.has(targetId) || !navScreenIds.has(targetId)) {
         return false;
       }
 
@@ -308,19 +307,10 @@
           return;
         }
 
-        lockLandscape();
-        showScreen(button.dataset.screenTarget);
-      });
-
-      disabledNavItems.forEach((item) => {
-        item.addEventListener('click', (event) => event.preventDefault());
-        item.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-          }
+          lockLandscape();
+          showScreen(button.dataset.screenTarget);
         });
       });
-    });
 
     updateViewportSize();
     lockLandscape();
