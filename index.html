@@ -246,6 +246,12 @@
     const navScreenIds = new Set(['modeSelect', 'songSelect', 'accountScreen']);
     const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
+    const fallbackToMainMenu = () => {
+      showScreen('mainMenu');
+      if (window.location.hash) {
+        history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+      }
+    };
     const resolveHashScreen = () => {
       const targetId = window.location.hash.replace('#', '');
       if (!screenIds.has(targetId)) {
@@ -310,11 +316,11 @@
     window.addEventListener('orientationchange', updateViewportSize);
     window.addEventListener('hashchange', () => {
       if (!resolveHashScreen()) {
-        showScreen('mainMenu');
+        fallbackToMainMenu();
       }
     });
     if (!resolveHashScreen()) {
-      showScreen('mainMenu');
+      fallbackToMainMenu();
     }
   </script>
 </body>
