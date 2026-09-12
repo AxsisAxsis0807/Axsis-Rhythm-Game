@@ -247,6 +247,7 @@
     const navButtons = document.querySelectorAll('.bottom-nav a[data-screen-target]');
     const screenIds = new Set(Array.from(screens, (screen) => screen.id));
     const fallbackToMainMenu = () => {
+      lockLandscape();
       showScreen('mainMenu');
       if (window.location.hash) {
         const nextUrl = new URL(window.location.href);
@@ -318,8 +319,7 @@
     window.addEventListener('orientationchange', updateViewportSize);
     window.addEventListener('hashchange', () => {
       if (!window.location.hash || window.location.hash === '#') {
-        lockLandscape();
-        showScreen('mainMenu');
+        fallbackToMainMenu();
         return;
       }
 
