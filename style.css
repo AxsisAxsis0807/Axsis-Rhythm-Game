@@ -694,20 +694,16 @@ body {
 
 @media (orientation: landscape) {
     body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         padding: clamp(0.75rem, 1.8vw, 1.5rem);
     }
 
     #app {
         width: min(96vw, 1520px);
-        min-height: 0;
-        max-height: 94vh;
+        margin: 0 auto;
     }
 
     .screen {
-        min-height: 0;
+        min-height: min(94vh, 900px);
         box-sizing: border-box;
         padding: clamp(1.6rem, 2.7vw, 2.4rem);
     }
