@@ -123,13 +123,13 @@
           </div>
 
           <ul class="mania-song-list" aria-label="楽曲一覧">
-            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">UNDERVEIL</span></button></li>
-            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Morimori Atsushi</span></button></li>
-            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">nevertoogone</span></button></li>
-            <li><button class="mania-song-card active" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Iyowa</span></button></li>
-            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Plum</span></button></li>
-            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Project Moon</span></button></li>
-            <li><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Xyris</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">UNDERVEIL</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Morimori Atsushi</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">nevertoogone</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card active" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Iyowa</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Plum</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Project Moon</span></button></li>
+            <li class="mania-song-item"><button class="mania-song-card" type="button"><span class="song-arrow" aria-hidden="true">↗</span><span class="mania-song-name">Xyris</span></button></li>
           </ul>
 
           <div class="mania-search-bar" aria-label="検索欄">
@@ -341,8 +341,7 @@
         return;
       }
 
-      if (!navScreenIds.has(targetId)) {
-        fallbackToMainMenu();
+      if (!screenIds.has(targetId)) {
         return;
       }
 
@@ -355,7 +354,7 @@
     });
     if (window.location.hash && window.location.hash !== '#') {
       const initialTargetId = window.location.hash.replace('#', '');
-      if (navScreenIds.has(initialTargetId) && resolveHashScreen()) {
+      if (screenIds.has(initialTargetId) && resolveHashScreen()) {
         lockLandscape();
       } else {
         fallbackToMainMenu();
