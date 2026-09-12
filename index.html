@@ -249,7 +249,9 @@
     const fallbackToMainMenu = () => {
       showScreen('mainMenu');
       if (window.location.hash) {
-        history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+        const nextUrl = new URL(window.location.href);
+        nextUrl.hash = '';
+        history.replaceState(null, '', nextUrl.toString());
       }
     };
     const resolveHashScreen = () => {
