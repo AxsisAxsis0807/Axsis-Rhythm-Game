@@ -48,6 +48,7 @@ const gameState = {
 
 const showScreen = (targetId) => {
   const nextScreen = screens.find((screenElement) => screenElement.id === targetId);
+  const activeScreen = screens.find((screenElement) => !screenElement.hidden);
 
   if (!nextScreen) {
     return;
@@ -59,7 +60,7 @@ const showScreen = (targetId) => {
     screenElement.classList.toggle('is-active', isTarget);
   });
 
-  if (targetId === 'gameScreen') {
+  if (targetId === 'gameScreen' && activeScreen?.id !== 'gameScreen') {
     currentSongLabel.textContent = selectedSongTitle;
     startGame();
   } else if (gameState.running) {
@@ -93,6 +94,7 @@ const setJudge = (label) => {
 };
 
 const resetGame = () => {
+  lanePressed.fill(false);
   gameState.lastFrameTime = 0;
   gameState.spawnTimer = 0;
   gameState.spawnIndex = 0;
@@ -118,6 +120,7 @@ const startGame = () => {
 };
 
 const stopGame = () => {
+  lanePressed.fill(false);
   gameState.running = false;
   if (gameState.animationFrameId) {
     window.cancelAnimationFrame(gameState.animationFrameId);
@@ -155,7 +158,9 @@ const judgeLane = (laneIndex) => {
   const judgeLineY = canvas.height - 96;
   const candidates = gameState.notes
     .filter((note) => note.lane === laneIndex)
-    .sort((left, right) => Math.abs(left.y - judgeLineY) - Math.abs(right.y - judgeLineY));
+    .sort(
+      (left, right) => Math.abs(left.y + left.height / 2 - judgeLineY) - Math.abs(right.y + right.height / 2 - judgeLineY)
+    );
 
   const targetNote = candidates[0];
   if (!targetNote) {
@@ -163,7 +168,7 @@ const judgeLane = (laneIndex) => {
     return;
   }
 
-  const distance = Math.abs(targetNote.y - judgeLineY);
+  const distance = Math.abs(targetNote.y + targetNote.height / 2 - judgeLineY);
   if (distance <= 26) {
     gameState.score += 1000;
     gameState.combo += 1;
@@ -321,6 +326,10 @@ songCards.forEach((songCard) => {
     setSelectedSong(songCard);
   });
 });
+
+if (songCards.length > 0) {
+  setSelectedSong(document.querySelector('.mania-song-card.active') ?? songCards[0]);
+}
 
 screenButtons.forEach((button) => {
   button.addEventListener('click', () => {
